@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "wooapb/product-grid",
+  "title": "Woo Product Grid",
+  "category": "woocommerce",
+  "icon": "grid-view",
+  "description": "Display WooCommerce products in a grid layout.",
+  "supports": {
+    "html": false
+  },
+  "attributes": {
+    "columns": {
+      "type": "number",
+      "default": 4
+    },
+    "postsPerPage": {
+      "type": "number",
+      "default": 8
+    }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./editor.css",
+  "style": "file:./style.css"
+}

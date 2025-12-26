@@ -1,0 +1,10 @@
+import Swiper from 'swiper';
+
+document.addEventListener( 'DOMContentLoaded', () => {
+	document.querySelectorAll( '.wooapb-carousel' ).forEach( ( el ) => {
+		new Swiper( el, {
+			slidesPerView: parseInt( el.dataset.slides, 10 ) || 4,
+			spaceBetween: 24
+		} );
+	} );
+} );

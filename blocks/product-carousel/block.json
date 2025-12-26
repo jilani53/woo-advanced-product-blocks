@@ -1,0 +1,16 @@
+{
+  "name": "wooapb/product-carousel",
+  "title": "Woo Product Carousel",
+  "category": "woocommerce",
+  "icon": "slides",
+  "attributes": {
+    "slidesPerView": {
+      "type": "number",
+      "default": 4
+    }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./editor.css",
+  "style": "file:./style.css",
+  "viewScript": "file:./view.js"
+}
