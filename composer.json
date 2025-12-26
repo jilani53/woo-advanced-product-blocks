@@ -1,5 +1,5 @@
 {
-    "name": "yourcompany/woo-advanced-product-blocks",
+    "name": "wooapb/woo-advanced-product-blocks",
     "type": "wordpress-plugin",
     "license": "GPL-2.0-or-later",
     "require": {
@@ -8,21 +8,6 @@
     "autoload": {
         "psr-4": {
             "WooAPB\\": "src/"
-        }
-    },
-    "require-dev": {
-        "wp-coding-standards/wpcs": "^3.0",
-        "phpcompatibility/phpcompatibility-wp": "^2.1",
-        "dealerdirect/phpcodesniffer-composer-installer": "^1.0"
-    },
-    "scripts": {
-        "lint": "phpcs --standard=WordPress",
-        "lint:fix": "phpcbf --standard=WordPress"
-    },
-    "config": {
-        "optimize-autoloader": true,
-        "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
         }
     },
     "minimum-stability": "stable",
