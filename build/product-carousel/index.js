@@ -1,0 +1,1 @@
+(()=>{"use strict";const o=window.wp.blocks,e=window.wp.blockEditor,r=window.ReactJSXRuntime;(0,o.registerBlockType)("wooapb/product-carousel",{edit:()=>{const o=(0,e.useBlockProps)();return(0,r.jsx)("div",{...o,children:"Woo Product Carousel (Editor Preview)"})},save:()=>null})})();

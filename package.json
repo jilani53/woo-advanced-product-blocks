@@ -4,18 +4,9 @@
     "description": "Advanced WooCommerce product blocks (Grid, Carousel, Filters) built with Gutenberg.",
     "author": "Your Company",
     "license": "GPL-2.0-or-later",
-    "private": true,
-    "engines": {
-        "node": ">=18",
-        "npm": ">=9"
-    },
     "scripts": {
-        "build": "wp-scripts build --webpack-config webpack.config.js",
-        "start": "wp-scripts start --webpack-config webpack.config.js",
-        "lint:js": "wp-scripts lint-js",
-        "lint:css": "wp-scripts lint-style",
-        "format": "wp-scripts format",
-        "packages-update": "wp-scripts packages-update"
+        "build": "wp-scripts build",
+        "start": "wp-scripts start"
     },
     "dependencies": {
         "@wordpress/api-fetch": "^7.0.0",

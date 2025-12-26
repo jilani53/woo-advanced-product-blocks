@@ -1,45 +1,45 @@
+// blocks/product-grid/index.js
 import { registerBlockType } from '@wordpress/blocks';
-import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
 import { PanelBody, RangeControl } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
 
-registerBlockType( 'wooapb/product-grid', {
-	edit( { attributes, setAttributes } ) {
-		const { columns, postsPerPage } = attributes;
+registerBlockType('wooapb/product-grid', {
+	edit: ({ attributes, setAttributes }) => {
 		const blockProps = useBlockProps();
 
 		return (
-			<>
+			<div {...blockProps}>
 				<InspectorControls>
-					<PanelBody title="Grid Settings">
+					<PanelBody title={__('Grid Settings', 'wooapb')} initialOpen={true}>
 						<RangeControl
-							label="Columns"
-							value={ columns }
-							onChange={ ( value ) => setAttributes( { columns: value } ) }
-							min={ 1 }
-							max={ 6 }
+							label={__('Columns', 'wooapb')}
+							value={attributes.columns}
+							onChange={(value) => setAttributes({ columns: value })}
+							min={1}
+							max={6}
 						/>
 						<RangeControl
-							label="Products Per Page"
-							value={ postsPerPage }
-							onChange={ ( value ) =>
-								setAttributes( { postsPerPage: value } )
-							}
-							min={ 1 }
-							max={ 48 }
+							label={__('Products per Page', 'wooapb')}
+							value={attributes.postsPerPage}
+							onChange={(value) => setAttributes({ postsPerPage: value })}
+							min={1}
+							max={50}
 						/>
 					</PanelBody>
 				</InspectorControls>
 
-				<div { ...blockProps }>
+				<div className="wooapb-product-grid">
+					<p>{__('Product Grid Preview', 'wooapb')}</p>
 					<p>
-						Woo Product Grid — { columns } columns, { postsPerPage } products
+						{__('Columns:', 'wooapb')} {attributes.columns},{' '}
+						{__('Products per page:', 'wooapb')} {attributes.postsPerPage}
 					</p>
 				</div>
-			</>
+			</div>
 		);
 	},
 
-	save() {
-		return null; // Server-side rendered
-	}
-} );
+	// Server-side rendered via PHP
+	save: () => null,
+});
