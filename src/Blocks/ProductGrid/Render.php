@@ -5,17 +5,17 @@ use WooAPB\Query\ProductQuery;
 
 defined( 'ABSPATH' ) || exit;
 
-final class Render {
+class Render {
 
-	public static function output( array $attributes ): string {
+	public static function render( array $attributes ): string {
 		$columns        = absint( $attributes['columns'] ?? 4 );
 		$posts_per_page = absint( $attributes['postsPerPage'] ?? 8 );
 
 		$query  = new ProductQuery();
 		$result = $query->get_products(
-			[
+			array(
 				'posts_per_page' => $posts_per_page,
-			]
+			)
 		);
 
 		if ( empty( $result ) ) {

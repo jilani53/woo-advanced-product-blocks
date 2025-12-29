@@ -5,7 +5,7 @@ use WooAPB\Query\ProductQuery;
 
 defined( 'ABSPATH' ) || exit;
 
-final class Render {
+class Render {
 
 	public static function render( array $attributes ) {
 

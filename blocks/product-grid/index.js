@@ -2,6 +2,7 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
 import { PanelBody, RangeControl } from '@wordpress/components';
+import ServerSideRender from '@wordpress/server-side-render';
 import { __ } from '@wordpress/i18n';
 
 registerBlockType('wooapb/product-grid', {
@@ -31,6 +32,11 @@ registerBlockType('wooapb/product-grid', {
 
 				<div className="wooapb-product-grid">
 					<p>{__('Product Grid Preview', 'wooapb')}</p>
+					{/* SSR preview in editor */}
+					<ServerSideRender
+						block="wooapb/product-grid"
+						attributes={attributes}
+					/>
 					<p>
 						{__('Columns:', 'wooapb')} {attributes.columns},{' '}
 						{__('Products per page:', 'wooapb')} {attributes.postsPerPage}
