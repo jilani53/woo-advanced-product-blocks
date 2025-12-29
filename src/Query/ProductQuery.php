@@ -5,13 +5,16 @@ use WC_Product_Query;
 
 defined( 'ABSPATH' ) || exit;
 
-final class ProductQuery {
+class ProductQuery {
 
 	public static function get_products( array $args ) {
 
+		$page = $args['page'] ?? 1;
+
 		$query = new WC_Product_Query(
 			array(
-				'limit'        => $args['per_page'] ?? 8,
+				'limit'        => $args['per_page'] ?? 4,
+				'page'         => $page,
 				'status'       => 'publish',
 				'stock_status' => ! empty( $args['in_stock'] ) ? 'instock' : '',
 				'min_price'    => $args['min_price'] ?? '',

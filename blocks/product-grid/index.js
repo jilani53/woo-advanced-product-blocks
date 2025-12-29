@@ -31,7 +31,6 @@ registerBlockType('wooapb/product-grid', {
 				</InspectorControls>
 
 				<div className="wooapb-product-grid">
-					<p>{__('Product Grid Preview', 'wooapb')}</p>
 					{/* SSR preview in editor */}
 					<ServerSideRender
 						block="wooapb/product-grid"
