@@ -68,48 +68,51 @@ class Assets {
 	/**
 	 * Initialize block frontend style enqueue.
 	 */
-	public static function front(): void {
-		add_action( 'wp_enqueue_scripts', array( self::class, 'enqueue_frontend_styles' ) );
-	}
+	// public static function front(): void {
+	// 	add_action( 'wp_enqueue_scripts', array( self::class, 'enqueue_frontend_styles' ) );
+	// }
 
-	/**
-	 * Enqueue styles for blocks present on the page.
-	 */
-	public static function enqueue_frontend_styles(): void {
+	// /**
+	//  * Enqueue styles for blocks present on the page.
+	//  */
+	// public static function enqueue_frontend_styles(): void {
 
-		$blocks_path = plugin_dir_path( WOOAPB_FILE ) . 'blocks/';
-		$block_dirs  = glob( $blocks_path . '*/block.json' );
+	// 	$blocks_path = plugin_dir_path( WOOAPB_FILE ) . 'blocks/';
+	// 	$block_dirs  = glob( $blocks_path . '*/block.json' );
 
-		// var_dump( $block_dirs ); // For debugging purposes.	
+	// 	// var_dump( $block_dirs ); // For debugging purposes.	
 
-		foreach ( $block_dirs as $block_file ) {
+	// 	foreach ( $block_dirs as $block_file ) {
 
-			// Decode as associative array to use $block_json['name'] safely
+	// 		// Decode as associative array to use $block_json['name'] safely
 			
-			$block_json = json_decode( file_get_contents( $block_file ), true );
+	// 		$block_json = json_decode( file_get_contents( $block_file ), true );
 			
 
-			//var_dump( $block_json ); // For debugging purposes.
+	// 		var_dump( $block_json['style'] ); // For debugging purposes.
 
-			$block_name = $block_json['name'] ?? '';
-			$style_file = $block_json['style'] ?? '';
+	// 		$block_name = $block_json['name'] ?? '';
+	// 		$style_file = 'style-index.css' ?? '';
 
-			if ( empty( $block_name ) || empty( $style_file ) || ! has_block( $block_name ) ) {
-				continue;
-			}
+	// 		var_dump( $block_name ); // For debugging purposes.
 
-			$style_file_path = dirname( $block_file ) . '/' . basename( $style_file );
+	// 		if ( empty( $block_name ) || empty( $style_file ) || ! has_block( $block_name ) ) {
+	// 			continue;
+	// 		}
 
-			var_dump( $style_file_path ); // For debugging purposes.
+	// 		$style_file_path = dirname( $block_file ) . '/' . basename( $style_file );
 
-			if ( file_exists( $style_file_path ) ) {
-				wp_enqueue_style(
-					str_replace( '/', '-', $block_name ) . '-frontend',
-					plugins_url( 'blocks/' . basename( dirname( $block_file ) ) . '/build/' . basename( $style_file ), WOOAPB_FILE ),
-					array(),
-					filemtime( $style_file_path )
-				);
-			}
-		}
-	}
+	// 		if ( file_exists( $style_file_path ) ) {
+	// 			wp_enqueue_style(
+	// 				str_replace( '/', '-', $block_name ) . '-frontend',
+	// 				plugins_url(
+	// 					'build/' . str_replace( 'wooapb/', '', $block_name ) . '/' . $style_file,
+	// 					WOOAPB_FILE
+	// 				),
+	// 				array(),
+	// 				filemtime( $style_file_path )
+	// 			);
+	// 		}
+	// 	}
+	// }
 }

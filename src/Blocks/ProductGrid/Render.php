@@ -36,6 +36,7 @@ class Render {
 
 		ob_start();
 		?>
+		<div class="wp-block-wooapb-product-grid">
 		<div
 			class="wooapb-grid"
 			style="grid-template-columns: repeat(<?php echo esc_attr( $columns ); ?>, 1fr);"
@@ -49,6 +50,7 @@ class Render {
 					</a>
 				</div>
 			<?php endforeach; ?>
+		</div>
 		</div>
 		<?php
 		return ob_get_clean();
