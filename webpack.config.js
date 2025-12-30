@@ -1,30 +1,27 @@
-/**
- * WordPress dependencies
- */
-const defaultConfig = require('@wordpress/scripts/config/webpack.config');
-const path = require('path');
-const glob = require('glob');
+const path = require( 'path' );
+const fs = require( 'fs' );
+const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
 
-const files = glob.sync('./blocks/**/index.js');
+// 🔴 REQUIRED: remove default entry from wp-scripts
+delete defaultConfig.entry;
 
-if (!files.length) {
-	throw new Error(
-		'No block entry files found! Make sure blocks/*/index.js exists.'
-	);
-}
-
-// Build entries object in the format webpack expects
+const blocksDir = path.resolve( process.cwd(), 'blocks' );
 const entries = {};
-files.forEach((file) => {
-	const blockName = path.basename(path.dirname(file));
-	entries[blockName] = path.resolve(__dirname, file);
-});
+
+// Auto-register every block that has an index.js
+fs.readdirSync( blocksDir ).forEach( ( block ) => {
+	const entryFile = path.join( blocksDir, block, 'index.js' );
+
+	if ( fs.existsSync( entryFile ) ) {
+		entries[ `${ block }/index` ] = entryFile;
+	}
+} );
 
 module.exports = {
 	...defaultConfig,
-	entry: () => entries,
+	entry: entries,
 	output: {
-		path: path.resolve(__dirname, 'build'),
-		filename: '[name]/index.js',
+		path: path.resolve( process.cwd(), 'build' ),
+		filename: '[name].js',
 	},
 };

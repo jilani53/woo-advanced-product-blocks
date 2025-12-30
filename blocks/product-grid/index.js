@@ -1,3 +1,6 @@
+import './editor.css';
+import './style.css';
+
 // blocks/product-grid/index.js
 import { registerBlockType } from '@wordpress/blocks';
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';

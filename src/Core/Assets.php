@@ -3,7 +3,7 @@ namespace WooAPB\Core;
 
 defined( 'ABSPATH' ) || exit;
 
-final class Assets {
+class Assets {
 
 	public static function register() {
 
@@ -62,5 +62,54 @@ final class Assets {
 			WOOAPB_VERSION,
 			true
 		);
+	}
+
+
+	/**
+	 * Initialize block frontend style enqueue.
+	 */
+	public static function front(): void {
+		add_action( 'wp_enqueue_scripts', array( self::class, 'enqueue_frontend_styles' ) );
+	}
+
+	/**
+	 * Enqueue styles for blocks present on the page.
+	 */
+	public static function enqueue_frontend_styles(): void {
+
+		$blocks_path = plugin_dir_path( WOOAPB_FILE ) . 'blocks/';
+		$block_dirs  = glob( $blocks_path . '*/block.json' );
+
+		// var_dump( $block_dirs ); // For debugging purposes.	
+
+		foreach ( $block_dirs as $block_file ) {
+
+			// Decode as associative array to use $block_json['name'] safely
+			
+			$block_json = json_decode( file_get_contents( $block_file ), true );
+			
+
+			//var_dump( $block_json ); // For debugging purposes.
+
+			$block_name = $block_json['name'] ?? '';
+			$style_file = $block_json['style'] ?? '';
+
+			if ( empty( $block_name ) || empty( $style_file ) || ! has_block( $block_name ) ) {
+				continue;
+			}
+
+			$style_file_path = dirname( $block_file ) . '/' . basename( $style_file );
+
+			var_dump( $style_file_path ); // For debugging purposes.
+
+			if ( file_exists( $style_file_path ) ) {
+				wp_enqueue_style(
+					str_replace( '/', '-', $block_name ) . '-frontend',
+					plugins_url( 'blocks/' . basename( dirname( $block_file ) ) . '/build/' . basename( $style_file ), WOOAPB_FILE ),
+					array(),
+					filemtime( $style_file_path )
+				);
+			}
+		}
 	}
 }
