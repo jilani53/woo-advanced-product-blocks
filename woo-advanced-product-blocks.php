@@ -19,3 +19,18 @@ require_once __DIR__ . '/vendor/autoload.php';
 use WooAPB\Core\Plugin;
 
 ( new Plugin() )->init();
+
+
+
+// add_filter(
+// 	'woocommerce_blocks_product_attributes',
+// 	function ( $attributes, $product ) {
+
+// 		// Example: get badge from product meta
+// 		$attributes['my_custom_badge'] = $product->get_meta( '_my_custom_badge' );
+
+// 		return $attributes;
+// 	},
+// 	10,
+// 	2
+// );
