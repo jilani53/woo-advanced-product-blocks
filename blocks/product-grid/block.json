@@ -1,6 +1,6 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
-  "apiVersion": 2,
+  "apiVersion": 3,
   "name": "wooapb/product-grid",
   "title": "Woo Product Grid",
   "category": "woocommerce",
@@ -17,6 +17,10 @@
     "postsPerPage": {
       "type": "number",
       "default": 8
+    },
+    "inStock": {
+        "type": "boolean",
+        "default": false
     }
   },
   "editorScript": "file:../../build/product-grid/index.js",

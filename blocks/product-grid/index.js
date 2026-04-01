@@ -7,6 +7,7 @@ import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
 import { PanelBody, RangeControl } from '@wordpress/components';
 import ServerSideRender from '@wordpress/server-side-render';
 import { __ } from '@wordpress/i18n';
+import { CheckboxControl } from '@wordpress/components';
 
 registerBlockType('wooapb/product-grid', {
 	edit: ({ attributes, setAttributes }) => {
@@ -30,6 +31,11 @@ registerBlockType('wooapb/product-grid', {
 							min={1}
 							max={50}
 						/>
+						<CheckboxControl
+							label={__('Only stocked', 'wooapb')}
+							checked={attributes.inStock}
+							onChange={(value) => setAttributes({ inStock: value })}
+						/>
 					</PanelBody>
 				</InspectorControls>
 
@@ -42,6 +48,7 @@ registerBlockType('wooapb/product-grid', {
 					<p>
 						{__('Columns:', 'wooapb')} {attributes.columns},{' '}
 						{__('Products per page:', 'wooapb')} {attributes.postsPerPage}
+						{__('Only stocked:', 'wooapb')} {attributes.inStock ? __('Yes', 'wooapb') : __('No', 'wooapb')}
 					</p>
 				</div>
 			</div>

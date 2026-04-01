@@ -1,12 +1,30 @@
 <?php
+/**
+ * WooCommerce product render.
+ * 
+ * @package WooAPB\Blocks\ProductCarousel
+ * @since 1.0.0
+ */
+
 namespace WooAPB\Blocks\ProductCarousel;
 
 use WooAPB\Query\ProductQuery;
 
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
+/**
+ * Product render.
+ */
 class Render {
 
+	/**
+	 * Product render method.
+	 *
+	 * @param array $attributes Block attributes.
+	 * @return string Rendered block output.
+	 */
 	public static function render( array $attributes ) {
 
 		wp_enqueue_style( 'wooapb-base' );
@@ -27,7 +45,7 @@ class Render {
 		foreach ( $products as $product ) {
 			echo '<div class="swiper-slide">';
 			echo '<a href="' . esc_url( $product->get_permalink() ) . '">';
-			echo $product->get_image();
+			echo wp_kses_post( $product->get_image() );
 			echo '<h3>' . esc_html( $product->get_name() ) . '</h3>';
 			echo '</a></div>';
 		}

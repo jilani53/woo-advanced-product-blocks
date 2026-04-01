@@ -2,7 +2,7 @@ const path = require( 'path' );
 const fs = require( 'fs' );
 const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
 
-// 🔴 REQUIRED: remove default entry from wp-scripts
+// Remove default entry from wp-scripts.
 delete defaultConfig.entry;
 
 const blocksDir = path.resolve( process.cwd(), 'blocks' );
