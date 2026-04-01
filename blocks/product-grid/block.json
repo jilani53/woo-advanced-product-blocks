@@ -10,6 +10,14 @@
     "html": false
   },
   "attributes": {
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "description": {
+      "type": "string",
+      "default": ""
+    },
     "columns": {
       "type": "number",
       "default": 4
@@ -19,8 +27,86 @@
       "default": 8
     },
     "inStock": {
-        "type": "boolean",
-        "default": false
+      "type": "boolean",
+      "default": false
+    },
+    "border": {
+      "type": "object",
+      "default": {
+        "width": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "style": "solid",
+        "color": "",
+        "radius": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      }
+    },
+    "spacing": {
+      "type": "object",
+      "default": {
+        "margin": {
+          "top": "",
+          "right": "",
+          "bottom": "",
+          "left": "",
+          "unit": "px"
+        },
+        "padding": {
+          "top": "",
+          "right": "",
+          "bottom": "",
+          "left": "",
+          "unit": "px"
+        }
+      }
+    },
+    "titleColor": {
+      "type": "string",
+      "default": ""
+    },
+    "titleFontSize": {
+      "type": "string",
+      "default": ""
+    },
+    "fontWeight": {
+      "type": "string",
+      "default": ""
+    },
+    "lineHeight": {
+      "type": "string",
+      "default": ""
+    },
+    "marginTop": {
+      "type": "string",
+      "default": ""
+    },
+    "marginBottom": {
+      "type": "string",
+      "default": ""
+    },
+    "paddingTop": {
+      "type": "string",
+      "default": ""
+    },
+    "paddingBottom": {
+      "type": "string",
+      "default": ""
+    },
+    "customClass": {
+      "type": "string",
+      "default": ""
+    },
+    "zIndex": {
+      "type": "string",
+      "default": ""
     }
   },
   "editorScript": "file:../../build/product-grid/index.js",

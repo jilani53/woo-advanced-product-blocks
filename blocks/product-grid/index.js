@@ -3,11 +3,13 @@ import './style.css';
 
 // blocks/product-grid/index.js
 import { registerBlockType } from '@wordpress/blocks';
-import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import { useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, RangeControl } from '@wordpress/components';
 import ServerSideRender from '@wordpress/server-side-render';
 import { __ } from '@wordpress/i18n';
 import { CheckboxControl } from '@wordpress/components';
+
+import Inspector from './inspector';
 
 registerBlockType('wooapb/product-grid', {
 	edit: ({ attributes, setAttributes }) => {
@@ -15,29 +17,10 @@ registerBlockType('wooapb/product-grid', {
 
 		return (
 			<div {...blockProps}>
-				<InspectorControls>
-					<PanelBody title={__('Grid Settings', 'wooapb')} initialOpen={true}>
-						<RangeControl
-							label={__('Columns', 'wooapb')}
-							value={attributes.columns}
-							onChange={(value) => setAttributes({ columns: value })}
-							min={1}
-							max={6}
-						/>
-						<RangeControl
-							label={__('Products per Page', 'wooapb')}
-							value={attributes.postsPerPage}
-							onChange={(value) => setAttributes({ postsPerPage: value })}
-							min={1}
-							max={50}
-						/>
-						<CheckboxControl
-							label={__('Only stocked', 'wooapb')}
-							checked={attributes.inStock}
-							onChange={(value) => setAttributes({ inStock: value })}
-						/>
-					</PanelBody>
-				</InspectorControls>
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+				/>
 
 				<div className="wooapb-product-grid">
 					{/* SSR preview in editor */}
