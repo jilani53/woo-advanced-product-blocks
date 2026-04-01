@@ -47,7 +47,7 @@ registerBlockType('wooapb/product-grid', {
 					/>
 					<p>
 						{__('Columns:', 'wooapb')} {attributes.columns},{' '}
-						{__('Products per page:', 'wooapb')} {attributes.postsPerPage}
+						{__('Products per page:', 'wooapb')} {attributes.postsPerPage}, {' '}
 						{__('Only stocked:', 'wooapb')} {attributes.inStock ? __('Yes', 'wooapb') : __('No', 'wooapb')}
 					</p>
 				</div>
