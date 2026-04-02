@@ -1,6 +1,7 @@
 :root {
 	--wooapb-light-background-color: #f8f9fa;
 	--wooapb-light-active-background-color: #ededed;
+    --wooapb-light-border-color: #dddddd;
 }
 
 .wp-block-wooapb-product-grid {
@@ -74,17 +75,27 @@
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    border: 1px solid #ddd;
+    border: 1px solid var(--wooapb-light-border-color);
     cursor: pointer;
 }
 
 /* Panel Body */
+.components-panel__body.wooapb-border-wrapper,
 .wooapb-border-wrapper .components-panel__body-title .components-button {
 	background-color: var(--wooapb-light-background-color);
 }
 
+.wooapb-border-wrapper.is-opened .components-panel__body-title .components-button {
+    background-color: var(--wooapb-light-active-background-color);
+}
+
+.components-panel__body.wooapb-border-wrapper.is-opened .components-base-control {
+    margin-bottom: 0;
+}
+
 .components-panel__body.wooapb-border-wrapper {
 	margin-bottom: 16px;
+    border: 1px solid var(--wooapb-light-border-color);
 }
 
 /* Box control css */
