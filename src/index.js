@@ -1,0 +1,3 @@
+// src/index.js
+import '../../blocks/product-grid/index.js';
+import '../../blocks/product-carousel/index.js';

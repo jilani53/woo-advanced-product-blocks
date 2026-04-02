@@ -1,0 +1,8 @@
+.wp-block-wooapb-product-grid .wooapb-grid {
+	display: grid;
+	gap: 24px;
+}
+
+.wp-block-wooapb-product-grid .wooapb-product {
+	text-align: center;
+}

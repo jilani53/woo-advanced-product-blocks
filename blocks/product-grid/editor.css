@@ -1,0 +1,101 @@
+:root {
+	--wooapb-light-background-color: #f8f9fa;
+	--wooapb-light-active-background-color: #ededed;
+    --wooapb-light-border-color: #dddddd;
+}
+
+.wp-block-wooapb-product-grid {
+	border: 1px dashed #ccd0d4;
+	padding: 16px;
+	background: var(--wooapb-light-background-color);
+}
+
+/**
+ * Style for the tabs in the editor.
+ */
+.wooapb-tabs .components-tab-panel__tabs {
+	display: flex;
+	gap: 6px;
+	background-color: var(--wooapb-light-background-color);
+}
+
+.wooapb-tabs .wooapb-tab-title .tab-icon svg {
+    max-width: 20px;
+}
+
+.wooapb-tabs .components-tab-panel__tabs-item {
+	height: 60px !important;
+}
+
+.wooapb-tabs .components-tab-panel__tabs button {
+	flex: 1;
+	justify-content: center;
+}
+
+.wooapb-tabs .components-tab-panel__tabs button.active-tab {
+    border-bottom: 2px solid #007cba;
+	background-color: var(--wooapb-light-active-background-color);
+}
+
+
+
+
+
+/**
+ * Styles for the controls in the editor.
+ */
+.wooapb-control {
+    margin-bottom: 16px;
+}
+
+.wooapb-control-label {
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #1e1e1e;
+}
+
+.wooapb-color-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.wooapb-color-wrapper {
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.wooapb-color-wrapper .wooapb-control-label {
+	margin-bottom: 0;
+}
+
+.wooapb-color-swatch {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid var(--wooapb-light-border-color);
+    cursor: pointer;
+}
+
+/* Panel Body */
+.components-panel__body.wooapb-border-wrapper,
+.wooapb-border-wrapper .components-panel__body-title .components-button {
+	background-color: var(--wooapb-light-background-color);
+}
+
+.wooapb-border-wrapper.is-opened .components-panel__body-title .components-button {
+    background-color: var(--wooapb-light-active-background-color);
+}
+
+.components-panel__body.wooapb-border-wrapper.is-opened .components-base-control {
+    margin-bottom: 0;
+}
+
+.components-panel__body.wooapb-border-wrapper {
+	margin-bottom: 16px;
+    border: 1px solid var(--wooapb-light-border-color);
+}
+
+/* Box control css */
