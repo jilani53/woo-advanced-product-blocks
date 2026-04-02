@@ -10,6 +10,7 @@
     "html": false
   },
   "attributes": {
+    "blockId": { "type": "string" },
     "title": {
       "type": "string",
       "default": ""

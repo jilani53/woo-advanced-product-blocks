@@ -12,6 +12,9 @@ if ( ! function_exists( 'add_action' ) ) {
 	exit;
 }
 
+use WooAPB\Core\Assets;
+use WooAPB\Core\CssCollector;
+
 /**
  * Core files entry point.
  */
@@ -21,8 +24,13 @@ class Plugin {
 	 * Constructor.
 	 */
 	public function __construct() {
+		// Cache bust the product query cache when a product is saved or updated.
 		add_action( 'save_post_product', array( self::class, 'bump_cache_version' ) );
 		add_action( 'woocommerce_update_product', array( self::class, 'bump_cache_version' ) );
+
+		// Load block based inline styles.
+		add_action( 'wp_enqueue_scripts', array( Assets::class, 'enqueue' ), 20 );
+		add_action( 'wp_enqueue_scripts', array( CssCollector::class, 'output' ), 20 );
 	}
 
 	/**
@@ -37,7 +45,7 @@ class Plugin {
 
 	/**
 	 * Flush product query cache.
-	 * 
+	 *
 	 * @param int $product_id Post ID.
 	 *
 	 * @return void

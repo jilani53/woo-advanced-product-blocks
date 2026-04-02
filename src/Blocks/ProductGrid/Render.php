@@ -7,11 +7,12 @@
  */
 namespace WooAPB\Blocks\ProductGrid;
 
-use WC_Product_Query;
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
+
+use WC_Product_Query;
+use WooAPB\Core\CssCollector;
 
 /**
  * Renders the Product Grid block on the frontend.
@@ -24,7 +25,7 @@ class Render {
 	 * @param array $attributes Block attributes.
 	 * @return string
 	 */
-	public static function render( array $attributes ): string {
+	public static function render( array $attributes ) {
 		$columns        = absint( $attributes['columns'] ?? 4 );
 		$posts_per_page = absint( $attributes['postsPerPage'] ?? 4 );
 		$in_stock       = filter_var( $attributes['inStock'] ?? false, FILTER_VALIDATE_BOOLEAN );
@@ -61,7 +62,35 @@ class Render {
 		}
 
 		if ( empty( $product_ids ) ) {
-			return '<p>No products found.</p>';
+			return sprintf( '<p>%s</p>', esc_html__( 'No products found.', 'woo-advanced-product-blocks' ) );
+		}
+
+		/**
+		 * Generate unique block ID
+		 */
+		$block_id = ! empty( $attributes['blockId'] ) ? 'wooapb-' . sanitize_key( $attributes['blockId'] ) : 'wooapb-product-grid';
+
+		/**
+		 * Dynamic CSS builder
+		 */
+		$css = '';
+
+		$selector = '#' . $block_id . ' .wc-block-grid__product-title';
+
+		if ( ! empty( $attributes['titleColor'] ) ) {
+			$css .= $selector . '{color:' . sanitize_text_field( $attributes['titleColor'] ) . ';}';
+		}
+
+		if ( ! empty( $attributes['titleFontSize'] ) ) {
+			$css .= $selector . '{font-size:' . sanitize_text_field( $attributes['titleFontSize'] ) . ';}';
+		}
+
+		if ( ! empty( $attributes['fontWeight'] ) ) {
+			$css .= $selector . '{font-weight:' . sanitize_text_field( $attributes['fontWeight'] ) . ';}';
+		}
+
+		if ( ! empty( $attributes['lineHeight'] ) ) {
+			$css .= $selector . '{line-height:' . sanitize_text_field( $attributes['lineHeight'] ) . ';}';
 		}
 
 		// Lazy load product objects only when needed.
@@ -69,7 +98,7 @@ class Render {
 
 		ob_start();
 		?>
-		<div class="wp-block-wooapb-product-grid">
+		<div id="<?php echo esc_attr( $block_id ); ?>">
 			<ul class="wooapb-grid products columns-<?php echo esc_attr( $columns ); ?>" style="grid-template-columns: repeat(<?php echo esc_attr( $columns ); ?>, 1fr);">
 				<?php foreach ( $products as $product ) : ?>
 					<li class="wc-block-grid__product"
@@ -84,7 +113,16 @@ class Render {
 				<?php endforeach; ?>
 			</ul>
 		</div>
+
 		<?php
+
+		/**
+		 * Render once in footer
+		 */
+		if ( ! empty( $css ) ) {
+			CssCollector::add( $css );
+		}
+
 		return ob_get_clean();
 	}
 }

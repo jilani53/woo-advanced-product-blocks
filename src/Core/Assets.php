@@ -80,4 +80,13 @@ class Assets {
 			true
 		);
 	}
+
+	/**
+	 * Enqueue assets.
+	 *
+	 * @return void
+	 */
+	public static function enqueue() {
+		wp_enqueue_style( 'wooapb-base' );
+	}
 }

@@ -5,9 +5,17 @@
 }
 
 .wp-block-wooapb-product-grid {
-	border: 1px dashed #ccd0d4;
-	padding: 16px;
 	background: var(--wooapb-light-background-color);
+	padding: 16px;
+    border-radius: 4px;
+}
+
+.wp-block-wooapb-product-grid {
+    border: 1px dashed var(--wooapb-light-border-color);
+}
+
+.wooapb-admin-bar {
+    text-align: center;
 }
 
 /**
@@ -36,10 +44,6 @@
     border-bottom: 2px solid #007cba;
 	background-color: var(--wooapb-light-active-background-color);
 }
-
-
-
-
 
 /**
  * Styles for the controls in the editor.
@@ -99,3 +103,14 @@
 }
 
 /* Box control css */
+
+
+/**
+ * Editor styles for the product title.
+ */
+.wooapb-product-grid .wc-block-grid__product-title {
+	color: var(--wooapb-title-color) !important;
+	font-size: var(--wooapb-title-size);
+	font-weight: var(--wooapb-title-weight);
+	line-height: var(--wooapb-title-line);
+}
