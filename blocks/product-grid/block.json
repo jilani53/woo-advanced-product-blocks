@@ -50,22 +50,29 @@
       }
     },
     "spacing": {
-      "type": "object",
-      "default": {
-        "margin": {
-          "top": "",
-          "right": "",
-          "bottom": "",
-          "left": "",
-          "unit": "px"
-        },
-        "padding": {
-          "top": "",
-          "right": "",
-          "bottom": "",
-          "left": "",
-          "unit": "px"
-        }
+      "desktop": {
+        "top": "",
+        "right": "",
+        "bottom": "",
+        "left": "",
+        "unit": "px",
+        "linked": true
+      },
+      "tablet": {
+        "top": "",
+        "right": "",
+        "bottom": "",
+        "left": "",
+        "unit": "px",
+        "linked": true
+      },
+      "mobile": {
+        "top": "",
+        "right": "",
+        "bottom": "",
+        "left": "",
+        "unit": "px",
+        "linked": true
       }
     },
     "titleColor": {

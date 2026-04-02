@@ -1,7 +1,12 @@
+:root {
+	--wooapb-light-background-color: #f8f9fa;
+	--wooapb-light-active-background-color: #ededed;
+}
+
 .wp-block-wooapb-product-grid {
 	border: 1px dashed #ccd0d4;
 	padding: 16px;
-	background: #f8f9fa;
+	background: var(--wooapb-light-background-color);
 }
 
 /**
@@ -10,7 +15,7 @@
 .wooapb-tabs .components-tab-panel__tabs {
 	display: flex;
 	gap: 6px;
-	background-color: #f8f9fa;
+	background-color: var(--wooapb-light-background-color);
 }
 
 .wooapb-tabs .wooapb-tab-title .tab-icon svg {
@@ -28,7 +33,7 @@
 
 .wooapb-tabs .components-tab-panel__tabs button.active-tab {
     border-bottom: 2px solid #007cba;
-	background-color: #ccd0d4;
+	background-color: var(--wooapb-light-active-background-color);
 }
 
 
@@ -73,4 +78,13 @@
     cursor: pointer;
 }
 
+/* Panel Body */
+.wooapb-border-wrapper .components-panel__body-title .components-button {
+	background-color: var(--wooapb-light-background-color);
+}
 
+.components-panel__body.wooapb-border-wrapper {
+	margin-bottom: 16px;
+}
+
+/* Box control css */

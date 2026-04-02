@@ -40,7 +40,7 @@ const BorderControl = ({
     };
 
     return (
-        <PanelBody title={label} initialOpen={false}>
+        <PanelBody className='wooapb-border-wrapper' title={label} initialOpen={false}>
             <SelectControl
                 label={__('Style', 'wooapb')}
                 value={border.style}

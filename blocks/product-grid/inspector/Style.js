@@ -5,11 +5,13 @@ import BorderControl from '../../controls/BorderControl';
 import ColorControl from '../../controls/ColorControl';
 import TypographyControl from '../../controls/TypographyControl';
 import SpacingControl from '../../controls/SpacingControl';
+import BoxControl from '../../controls/BoxControl';
 
 const Style = ({ attributes, setAttributes }) => {
 	const {
 		titleColor,
 		border,
+		spacing,
 		titleFontSize,
 		fontWeight,
 		lineHeight,
@@ -69,6 +71,16 @@ const Style = ({ attributes, setAttributes }) => {
 					})
 				}
 			/>
+
+			{/* <BoxControl
+				label="Margin"
+				value={spacing}
+				onChange={(val) =>
+					setAttributes({ spacing: val })
+				}
+			/> */}
+
+
 		</PanelBody>
 	);
 };

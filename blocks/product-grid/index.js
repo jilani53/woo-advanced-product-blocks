@@ -3,40 +3,11 @@ import './style.css';
 
 // blocks/product-grid/index.js
 import { registerBlockType } from '@wordpress/blocks';
-import { useBlockProps } from '@wordpress/block-editor';
-import { PanelBody, RangeControl } from '@wordpress/components';
-import ServerSideRender from '@wordpress/server-side-render';
 import { __ } from '@wordpress/i18n';
-import { CheckboxControl } from '@wordpress/components';
-
-import Inspector from './inspector';
+import Edit from './edit';
 
 registerBlockType('wooapb/product-grid', {
-	edit: ({ attributes, setAttributes }) => {
-		const blockProps = useBlockProps();
-
-		return (
-			<div {...blockProps}>
-				<Inspector
-					attributes={attributes}
-					setAttributes={setAttributes}
-				/>
-
-				<div className="wooapb-product-grid">
-					{/* SSR preview in editor */}
-					<ServerSideRender
-						block="wooapb/product-grid"
-						attributes={attributes}
-					/>
-					<p>
-						{__('Columns:', 'wooapb')} {attributes.columns},{' '}
-						{__('Products per page:', 'wooapb')} {attributes.postsPerPage}, {' '}
-						{__('Only stocked:', 'wooapb')} {attributes.inStock ? __('Yes', 'wooapb') : __('No', 'wooapb')}
-					</p>
-				</div>
-			</div>
-		);
-	},
+	edit: Edit,
 
 	// Server-side rendered via PHP
 	save: () => null,
