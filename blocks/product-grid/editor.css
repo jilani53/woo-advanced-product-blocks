@@ -190,6 +190,7 @@
 /** 
 * Ovverride default Gutenberg styles.
 */
+.wooapb-tabs .components-base-control span.components-base-control__label,
 .wooapb-tabs .components-base-control label.components-base-control__label,
 .wooapb-tabs .components-base-control label.components-input-control__label {
     text-transform: capitalize;
