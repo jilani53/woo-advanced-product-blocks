@@ -19,6 +19,7 @@ const Style = ({ attributes, setAttributes }) => {
 		marginBottom,
 		paddingTop,
 		paddingBottom,
+		typography,
 	} = attributes;
 
 	const updateAttr = (key, value) => {
@@ -35,23 +36,27 @@ const Style = ({ attributes, setAttributes }) => {
 				onChange={(value) => updateAttr('titleColor', value)}
 			/>
 
+			<TypographyControl
+                label="Typography"
+                value={ typography }
+                onChange={ ( val ) =>
+                    setAttributes( { typography: val } )
+                }
+            />
+
 			<BorderControl
-				value={border || {}}
-				onChange={(val) => updateAttr('border', val)}
+				label="Card Border"
+				value={ attributes.wrapperBorder }
+				onChange={ ( val ) =>
+					setAttributes( { wrapperBorder: val } )
+				}
 			/>
 
-			<TypographyControl
-				value={{
-					fontSize: titleFontSize,
-					fontWeight,
-					lineHeight,
-				}}
-				onChange={(val) =>
-					setAttributes({
-						titleFontSize: val?.fontSize ?? titleFontSize,
-						fontWeight: val?.fontWeight ?? fontWeight,
-						lineHeight: val?.lineHeight ?? lineHeight,
-					})
+			<BorderControl
+				label="Inner Border"
+				value={ attributes.innerBorder }
+				onChange={ ( val ) =>
+					setAttributes( { innerBorder: val } )
 				}
 			/>
 

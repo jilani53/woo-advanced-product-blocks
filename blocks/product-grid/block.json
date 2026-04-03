@@ -10,7 +10,9 @@
     "html": false
   },
   "attributes": {
-    "blockId": { "type": "string" },
+    "blockId": {
+      "type": "string"
+    },
     "title": {
       "type": "string",
       "default": ""
@@ -31,22 +33,68 @@
       "type": "boolean",
       "default": false
     },
+    "typography": {
+      "type": "object",
+      "default": {
+        "fontFamily": "",
+        "fontWeight": "",
+        "fontStyle": "",
+        "textTransform": "",
+        "textDecoration": "",
+        "fontSize": {
+          "desktop": "",
+          "tablet": "",
+          "mobile": "",
+          "unit": "px"
+        },
+        "lineHeight": {
+          "desktop": "",
+          "tablet": "",
+          "mobile": "",
+          "unit": "px"
+        },
+        "letterSpacing": {
+          "desktop": "",
+          "tablet": "",
+          "mobile": "",
+          "unit": "px"
+        }
+      }
+    },
     "border": {
       "type": "object",
       "default": {
-        "width": {
-          "top": 0,
-          "right": 0,
-          "bottom": 0,
-          "left": 0
+        "normal": {
+          "width": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "style": "solid",
+          "color": "",
+          "radius": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          }
         },
-        "style": "solid",
-        "color": "",
-        "radius": {
-          "top": 0,
-          "right": 0,
-          "bottom": 0,
-          "left": 0
+        "hover": {
+          "width": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          },
+          "style": "solid",
+          "color": "",
+          "radius": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          }
         }
       }
     },

@@ -93,6 +93,44 @@ class Render {
 			$css .= $selector . '{line-height:' . sanitize_text_field( $attributes['lineHeight'] ) . ';}';
 		}
 
+		// Typography group.
+		$typo = $attributes['typography'] ?? array();
+
+		if ( ! empty( $typo['fontFamily'] ) ) {
+			$css .= $selector . '{font-family:' . sanitize_text_field( $typo['fontFamily'] ) . ';}';
+		}
+
+		if ( ! empty( $typo['fontWeight'] ) ) {
+			$css .= $selector . '{font-weight:' . sanitize_text_field( $typo['fontWeight'] ) . ';}';
+		}
+
+		if ( ! empty( $typo['fontStyle'] ) ) {
+			$css .= $selector . '{font-style:' . sanitize_text_field( $typo['fontStyle'] ) . ';}';
+		}
+
+		if ( ! empty( $typo['textTransform'] ) ) {
+			$css .= $selector . '{text-transform:' . sanitize_text_field( $typo['textTransform'] ) . ';}';
+		}
+
+		if ( ! empty( $typo['textDecoration'] ) ) {
+			$css .= $selector . '{text-decoration:' . sanitize_text_field( $typo['textDecoration'] ) . ';}';
+		}
+
+		if ( ! empty( $typo['fontSize']['desktop'] ) ) {
+			$unit = $typo['fontSize']['unit'] ?? 'px';
+			$css .= $selector . '{font-size:' . floatval( $typo['fontSize']['desktop'] ) . $unit . ';}';
+		}
+
+		if ( ! empty( $typo['lineHeight']['desktop'] ) ) {
+			$unit = $typo['lineHeight']['unit'] ?? 'px';
+			$css .= $selector . '{line-height:' . floatval( $typo['lineHeight']['desktop'] ) . $unit . ';}';
+		}
+
+		if ( ! empty( $typo['letterSpacing']['desktop'] ) ) {
+			$unit = $typo['letterSpacing']['unit'] ?? 'px';
+			$css .= $selector . '{letter-spacing:' . floatval( $typo['letterSpacing']['desktop'] ) . $unit . ';}';
+		}
+
 		// Lazy load product objects only when needed.
 		$products = array_map( 'wc_get_product', $product_ids );
 
@@ -115,7 +153,6 @@ class Render {
 		</div>
 
 		<?php
-
 		/**
 		 * Render once in footer
 		 */
