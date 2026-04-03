@@ -57,9 +57,13 @@ const TypographyControl = ( {
     };
 
     return (
-        <PanelBody title={ label } initialOpen={ false }>
+        <PanelBody 
+            title={ label }
+            initialOpen={ false }
+            className="wooapb-typography-wrapper"
+        >
             {/* Device Switch */}
-            <ButtonGroup>
+            <ButtonGroup className="wooapb-typography-button-switcher" aria-label={ __( 'Device Switcher', 'wooapb' ) }>
                 { DEVICES.map( ( d ) => (
                     <Button
                         key={ d }
@@ -92,7 +96,7 @@ const TypographyControl = ( {
                 max={ 100 }
             />
 
-            <ButtonGroup>
+            <ButtonGroup className="wooapb-typography-button-switcher" aria-label={ __( 'Font Size Unit', 'wooapb' ) }>
                 { UNITS.map( ( u ) => (
                     <Button
                         key={ u }
@@ -159,6 +163,7 @@ const TypographyControl = ( {
                 onChange={ ( val ) => updateResponsive( 'lineHeight', val ) }
                 min={ 0 }
                 max={ 10 }
+                step={ 0.1 }
             />
 
             {/* Letter Spacing */}
@@ -168,6 +173,7 @@ const TypographyControl = ( {
                 onChange={ ( val ) => updateResponsive( 'letterSpacing', val ) }
                 min={ 0 }
                 max={ 20 }
+                step={ 0.1 }
             />
         </PanelBody>
     );

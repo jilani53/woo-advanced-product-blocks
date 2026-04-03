@@ -85,35 +85,43 @@
 
 /* Panel Body */
 .wooapb-tabs .components-panel__body.wooapb-border-wrapper.is-opened,
-.wooapb-border-wrapper .components-panel__body-title .components-button {
+.wooapb-border-wrapper .components-panel__body-title .components-button,
+.wooapb-tabs .components-panel__body.wooapb-typography-wrapper.is-opened,
+.wooapb-typography-wrapper .components-panel__body-title .components-button {
 	background-color: var(--wooapb-light-background-color);
 }
 
-.wooapb-border-wrapper.is-opened .components-panel__body-title .components-button {
+.wooapb-border-wrapper.is-opened .components-panel__body-title .components-button,
+.wooapb-typography-wrapper.is-opened .components-panel__body-title .components-button {
     background-color: var(--wooapb-light-active-background-color);
 }
 
-.components-panel__body.wooapb-border-wrapper.is-opened .components-base-control {
+.components-panel__body.wooapb-border-wrapper.is-opened .components-base-control,
+.components-panel__body.wooapb-typography-wrapper.is-opened .components-base-control {
     margin-bottom: 0;
 }
 
-.wooapb-tabs .components-panel__body.wooapb-border-wrapper.is-opened {
+.wooapb-tabs .components-panel__body.wooapb-border-wrapper.is-opened,
+.wooapb-tabs .components-panel__body.wooapb-typography-wrapper.is-opened {
     border-radius: 0;
 }
 
-.wooapb-tabs .components-panel__body.wooapb-border-wrapper {
+.wooapb-tabs .components-panel__body.wooapb-border-wrapper,
+.wooapb-tabs .components-panel__body.wooapb-typography-wrapper {
 	margin-bottom: 16px;
     border: 1px solid var(--wooapb-light-border-color);
 }
 
 /* Border group button styles */
-.wooapb-tabs .wooapb-border-button-switcher {
+.wooapb-tabs .wooapb-border-button-switcher,
+.wooapb-tabs .wooapb-typography-button-switcher {
     display: flex;
     width: 100%;
     margin: 15px 0;
 }
 
-.wooapb-tabs .wooapb-border-button-switcher .components-button {
+.wooapb-tabs .wooapb-border-button-switcher .components-button,
+.wooapb-tabs .wooapb-typography-button-switcher .components-button {
     flex: 1;
     justify-content: center;
 }
@@ -182,7 +190,8 @@
 /** 
 * Ovverride default Gutenberg styles.
 */
-.wooapb-tabs .components-base-control__label {
+.wooapb-tabs .components-base-control label.components-base-control__label,
+.wooapb-tabs .components-base-control label.components-input-control__label {
     text-transform: capitalize;
 }
 
