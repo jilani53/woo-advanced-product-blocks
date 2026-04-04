@@ -3,6 +3,7 @@ import { PanelBody, ColorPalette } from '@wordpress/components';
 
 import BorderControl from '../../controls/BorderControl';
 import ColorControl from '../../controls/ColorControl';
+import AdvancedColorControl from '../../controls/AdvancedColorControl';
 import TypographyControl from '../../controls/TypographyControl';
 import SpacingControl from '../../controls/SpacingControl';
 import BoxControl from '../../controls/BoxControl';
@@ -30,12 +31,27 @@ const Style = ({ attributes, setAttributes }) => {
 		<PanelBody title={__('Style Settings', 'wooapb')} initialOpen={true}>
 			<p>{__('Basic styling options', 'wooapb')}</p>
 
-			<ColorControl
+			{/* <ColorControl
 				label={__('Title Color', 'wooapb')}
 				value={titleColor}
 				onChange={(value) => updateAttr('titleColor', value)}
-			/>
+			/> */}
 
+			<AdvancedColorControl
+				label={ __( 'Title Color', 'wooapb' ) }
+				value={ attributes.titleColor }
+				onChange={ ( val ) => setAttributes( { titleColor: val } ) }
+				onReset={ () =>
+					setAttributes( {
+						titleColor: {
+							value: '',
+							source: 'custom',
+							slug: null,
+						},
+					} )
+				}
+			/>
+			
 			<TypographyControl
                 label="Typography"
                 value={ typography }
@@ -61,21 +77,22 @@ const Style = ({ attributes, setAttributes }) => {
 			/>
 
 			<SpacingControl
-				value={{
-					marginTop,
-					marginBottom,
-					paddingTop,
-					paddingBottom,
-				}}
-				onChange={(val) =>
-					setAttributes({
-						marginTop: val?.marginTop ?? marginTop,
-						marginBottom: val?.marginBottom ?? marginBottom,
-						paddingTop: val?.paddingTop ?? paddingTop,
-						paddingBottom: val?.paddingBottom ?? paddingBottom,
-					})
-				}
-			/>
+                label={ __( "Padding", "wooapb" ) }
+                value={ spacing }
+                onChange={ ( newValue ) =>
+                    setAttributes( { spacing: newValue } )
+                }
+                device="desktop"
+            />
+			
+			<SpacingControl
+                label={ __( "Margin", "wooapb" ) }
+                value={ spacing }
+                onChange={ ( newValue ) =>
+                    setAttributes( { spacing: newValue } )
+                }
+                device="desktop"
+            />
 
 			{/* <BoxControl
 				label="Margin"
