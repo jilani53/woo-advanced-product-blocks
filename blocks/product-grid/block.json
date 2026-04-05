@@ -33,6 +33,14 @@
 			"type": "boolean",
 			"default": false
 		},
+		"titleColor": {
+			"type": "object",
+			"default": {
+				"value": "",
+				"source": "custom",
+				"slug": null
+			}
+		},
 		"typography": {
 			"type": "object",
 			"default": {
@@ -124,14 +132,7 @@
 			},
 			"__experimentalRole": "style"
 		},
-		"titleColor": {
-			"type": "object",
-			"default": {
-				"value": "",
-				"source": "custom",
-				"slug": null
-			}
-		},
+		
 		"titleFontSize": {
 			"type": "string",
 			"default": ""

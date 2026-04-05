@@ -77,58 +77,39 @@ class Render {
 
 		$selector = '#' . $block_id . ' .wc-block-grid__product-title';
 
-		if ( ! empty( $attributes['titleColor'] ) ) {
-			$css .= $selector . '{color:' . sanitize_text_field( $attributes['titleColor'] ) . ';}';
-		}
-
-		if ( ! empty( $attributes['titleFontSize'] ) ) {
-			$css .= $selector . '{font-size:' . sanitize_text_field( $attributes['titleFontSize'] ) . ';}';
-		}
-
-		if ( ! empty( $attributes['fontWeight'] ) ) {
-			$css .= $selector . '{font-weight:' . sanitize_text_field( $attributes['fontWeight'] ) . ';}';
-		}
-
-		if ( ! empty( $attributes['lineHeight'] ) ) {
-			$css .= $selector . '{line-height:' . sanitize_text_field( $attributes['lineHeight'] ) . ';}';
+		if ( ! empty( $attributes['titleColor']['value'] ) ) {
+			$css .= $selector . '{color:' . sanitize_text_field( $attributes['titleColor']['value'] ) . ';}';
 		}
 
 		// Typography group.
-		$typo = $attributes['typography'] ?? array();
+		$typography = $attributes['typography'] ?? array();
 
-		if ( ! empty( $typo['fontFamily'] ) ) {
-			$css .= $selector . '{font-family:' . sanitize_text_field( $typo['fontFamily'] ) . ';}';
+		if ( ! empty( $typography ) ) {
+			$css .= $selector . '{font-size:' . sanitize_text_field( $typography['fontSize']['desktop'] . $typography['fontSize']['unit'] ) . ';}';
 		}
 
-		if ( ! empty( $typo['fontWeight'] ) ) {
-			$css .= $selector . '{font-weight:' . sanitize_text_field( $typo['fontWeight'] ) . ';}';
+		if ( ! empty( $typography ) ) {
+			$css .= $selector . '{font-weight:' . sanitize_text_field( $typography['fontWeight'] ) . ';}';
 		}
 
-		if ( ! empty( $typo['fontStyle'] ) ) {
-			$css .= $selector . '{font-style:' . sanitize_text_field( $typo['fontStyle'] ) . ';}';
+		if ( ! empty( $typography ) ) {
+			$css .= $selector . '{font-style:' . sanitize_text_field( $typography['fontStyle'] ) . ';}';
 		}
 
-		if ( ! empty( $typo['textTransform'] ) ) {
-			$css .= $selector . '{text-transform:' . sanitize_text_field( $typo['textTransform'] ) . ';}';
+		if ( ! empty( $typography ) ) {
+			$css .= $selector . '{text-transform:' . sanitize_text_field( $typography['textTransform'] ) . ';}';
 		}
 
-		if ( ! empty( $typo['textDecoration'] ) ) {
-			$css .= $selector . '{text-decoration:' . sanitize_text_field( $typo['textDecoration'] ) . ';}';
+		if ( ! empty( $typography ) ) {
+			$css .= $selector . '{text-decoration:' . sanitize_text_field( $typography['textDecoration'] ) . ';}';
 		}
 
-		if ( ! empty( $typo['fontSize']['desktop'] ) ) {
-			$unit = $typo['fontSize']['unit'] ?? 'px';
-			$css .= $selector . '{font-size:' . floatval( $typo['fontSize']['desktop'] ) . $unit . ';}';
+		if ( ! empty( $typography ) ) {
+			$css .= $selector . '{line-height:' . sanitize_text_field( $typography['lineHeight']['desktop'] ) . ';}';
 		}
 
-		if ( ! empty( $typo['lineHeight']['desktop'] ) ) {
-			$unit = $typo['lineHeight']['unit'] ?? 'px';
-			$css .= $selector . '{line-height:' . floatval( $typo['lineHeight']['desktop'] ) . $unit . ';}';
-		}
-
-		if ( ! empty( $typo['letterSpacing']['desktop'] ) ) {
-			$unit = $typo['letterSpacing']['unit'] ?? 'px';
-			$css .= $selector . '{letter-spacing:' . floatval( $typo['letterSpacing']['desktop'] ) . $unit . ';}';
+		if ( ! empty( $typography ) ) {
+			$css .= $selector . '{letter-spacing:' . sanitize_text_field( $typography['letterSpacing']['desktop'] . $typography['letterSpacing']['unit'] ) . ';}';
 		}
 
 		// Lazy load product objects only when needed.

@@ -1,20 +1,16 @@
 import { useBlockProps } from '@wordpress/block-editor';
 import { ServerSideRender } from '@wordpress/server-side-render';
-import { useEffect } from '@wordpress/element';
+import { useEffect, useMemo } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import Inspector from './inspector';
-import { getBoxCSS } from '../utils/box-style';
+import { useStyleVars } from './custom-style';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
-    const blockProps = useBlockProps({
-        style: {
-            '--wooapb-title-color': attributes.titleColor || '',
-            '--wooapb-title-size': attributes.titleFontSize || '',
-            '--wooapb-title-weight': attributes.fontWeight || '',
-            '--wooapb-title-line': attributes.lineHeight || '',
-        },
-    });
 
+    const blockProps = useBlockProps({
+        style: useStyleVars(attributes),
+    });
+    
     const shouldSetBlockId = !attributes.blockId && clientId;
 
     useEffect(() => {

@@ -9,7 +9,7 @@ import {
 import { useState } from '@wordpress/element';
 
 const DEVICES = [ 'desktop', 'tablet', 'mobile' ];
-const UNITS = [ 'px', 'em', 'vw' ];
+const UNITS = [ 'px', 'rem', 'em', 'vw' ];
 
 const TypographyControl = ( {
     label = __( 'Typography', 'wooapb' ),

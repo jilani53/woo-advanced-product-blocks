@@ -68,14 +68,6 @@ const Style = ({ attributes, setAttributes }) => {
 				}
 			/>
 
-			<BorderControl
-				label="Inner Border"
-				value={ attributes.innerBorder }
-				onChange={ ( val ) =>
-					setAttributes( { innerBorder: val } )
-				}
-			/>
-
 			<SpacingControl
                 label={ __( "Padding", "wooapb" ) }
                 value={ spacing }
