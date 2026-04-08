@@ -21,19 +21,6 @@ use WooAPB\Core\CssCollector;
 class Plugin {
 
 	/**
-	 * Constructor.
-	 */
-	public function __construct() {
-		// Cache bust the product query cache when a product is saved or updated.
-		add_action( 'save_post_product', array( self::class, 'bump_cache_version' ) );
-		add_action( 'woocommerce_update_product', array( self::class, 'bump_cache_version' ) );
-
-		// Load block based inline styles.
-		add_action( 'wp_enqueue_scripts', array( Assets::class, 'enqueue' ), 20 );
-		add_action( 'wp_enqueue_scripts', array( CssCollector::class, 'output' ), 20 );
-	}
-
-	/**
 	 * Init files.
 	 *
 	 * @return void
@@ -41,6 +28,18 @@ class Plugin {
 	public function init() {
 		add_action( 'init', array( Assets::class, 'register' ) );
 		add_action( 'init', array( BlockRegistry::class, 'register' ) );
+
+		// Cache bust the product query cache when a product is saved or updated.
+		add_action( 'save_post_product', array( self::class, 'bump_cache_version' ) );
+		add_action( 'woocommerce_update_product', array( self::class, 'bump_cache_version' ) );
+
+		// Load block based inline styles.
+		add_action( 'wp_enqueue_scripts', array( Assets::class, 'enqueue' ), 20 );
+		if ( wp_is_block_theme() ) {
+			add_action( 'wp_enqueue_scripts', array( CssCollector::class, 'output' ), 20 );
+		} else {
+			add_action( 'wp_footer', array( CssCollector::class, 'output' ) );
+		}
 	}
 
 	/**

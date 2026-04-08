@@ -61,8 +61,17 @@ class CssCollector {
 		// Minify CSS.
 		$css = preg_replace( '/\s+/', ' ', trim( $css ) );
 
-		if ( ! empty( $css ) ) {
+		if ( empty( $css ) ) {
+			return;
+		}
+
+		if ( wp_is_block_theme() ) {
 			wp_add_inline_style( 'wooapb-base', $css );
+		} else {
+			printf(
+				'<style id="wooapb-inline-css">%s</style>',
+				esc_html( $css )
+			);
 		}
 	}
 }

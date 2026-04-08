@@ -13,6 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use WC_Product_Query;
 use WooAPB\Core\CssCollector;
+use WooAPB\Blocks\ProductGrid\StyleBuilder;
 
 /**
  * Renders the Product Grid block on the frontend.
@@ -73,44 +74,7 @@ class Render {
 		/**
 		 * Dynamic CSS builder
 		 */
-		$css = '';
-
-		$selector = '#' . $block_id . ' .wc-block-grid__product-title';
-
-		if ( ! empty( $attributes['titleColor']['value'] ) ) {
-			$css .= $selector . '{color:' . sanitize_text_field( $attributes['titleColor']['value'] ) . ';}';
-		}
-
-		// Typography group.
-		$typography = $attributes['typography'] ?? array();
-
-		if ( ! empty( $typography ) ) {
-			$css .= $selector . '{font-size:' . sanitize_text_field( $typography['fontSize']['desktop'] . $typography['fontSize']['unit'] ) . ';}';
-		}
-
-		if ( ! empty( $typography ) ) {
-			$css .= $selector . '{font-weight:' . sanitize_text_field( $typography['fontWeight'] ) . ';}';
-		}
-
-		if ( ! empty( $typography ) ) {
-			$css .= $selector . '{font-style:' . sanitize_text_field( $typography['fontStyle'] ) . ';}';
-		}
-
-		if ( ! empty( $typography ) ) {
-			$css .= $selector . '{text-transform:' . sanitize_text_field( $typography['textTransform'] ) . ';}';
-		}
-
-		if ( ! empty( $typography ) ) {
-			$css .= $selector . '{text-decoration:' . sanitize_text_field( $typography['textDecoration'] ) . ';}';
-		}
-
-		if ( ! empty( $typography ) ) {
-			$css .= $selector . '{line-height:' . sanitize_text_field( $typography['lineHeight']['desktop'] ) . ';}';
-		}
-
-		if ( ! empty( $typography ) ) {
-			$css .= $selector . '{letter-spacing:' . sanitize_text_field( $typography['letterSpacing']['desktop'] . $typography['letterSpacing']['unit'] ) . ';}';
-		}
+		$css = StyleBuilder::build( $attributes, $block_id );
 
 		// Lazy load product objects only when needed.
 		$products = array_map( 'wc_get_product', $product_ids );
