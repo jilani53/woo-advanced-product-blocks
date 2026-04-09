@@ -1,0 +1,32 @@
+import Swiper from 'swiper';
+import { Navigation, Pagination } from 'swiper/modules';
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
+function initWooapbCarousels() {
+	const elements = document.querySelectorAll('.wooapb-carousel');
+
+	elements.forEach((el) => {
+		if (el.swiper) {
+			return;
+		}
+
+		new Swiper(el, {
+			modules: [Navigation, Pagination],
+			slidesPerView: 4,
+			spaceBetween: 20,
+			navigation: {
+				nextEl: el.querySelector('.swiper-button-next'),
+				prevEl: el.querySelector('.swiper-button-prev'),
+			},
+			pagination: {
+				el: el.querySelector('.swiper-pagination'),
+				clickable: true,
+			},
+		});
+	});
+}
+
+export default initWooapbCarousels;
