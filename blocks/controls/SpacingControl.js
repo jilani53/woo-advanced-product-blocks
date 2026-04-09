@@ -33,6 +33,16 @@ const SpacingControl = ( {
     const current = spacing?.[ device ] || {};
 
     /**
+     * Deep clone helper (prevents shared reference between controls)
+     */
+    const cloneSpacing = ( obj ) => ( {
+        ...obj,
+        desktop: { ...( obj?.desktop || {} ) },
+        tablet: { ...( obj?.tablet || {} ) },
+        mobile: { ...( obj?.mobile || {} ) },
+    } );
+
+    /**
      * Update single side
      */
     const updateSide = useCallback( ( side, newValue ) => {
@@ -55,11 +65,15 @@ const SpacingControl = ( {
             };
         }
 
-        onChange( updated );
+        /**
+         * Clone before onChange
+         */
+        onChange( cloneSpacing( updated ) );
+
     }, [ spacing, device, current, onChange ] );
 
     /**
-     * Toggle link/unlink (Spectra behavior: keep current values)
+     * Toggle link/unlink (keep current values)
      */
     const toggleLinked = useCallback( () => {
 
@@ -67,7 +81,10 @@ const SpacingControl = ( {
 
         updated.linked = ! spacing.linked;
 
-        onChange( updated );
+        /**
+         * Clone before onChange
+         */
+        onChange( cloneSpacing( updated ) );
 
     }, [ spacing, onChange ] );
 
@@ -76,10 +93,13 @@ const SpacingControl = ( {
      */
     const changeUnit = useCallback( ( unit ) => {
 
-        onChange( {
+        /**
+         * Clone before onChange
+         */
+        onChange( cloneSpacing( {
             ...spacing,
             unit,
-        } );
+        } ) );
 
     }, [ spacing, onChange ] );
 
@@ -101,7 +121,10 @@ const SpacingControl = ( {
                         value={ spacing.unit || 'px' }
                         options={ UNITS }
                         onChange={ ( unit ) =>
-                            onChange( { ...spacing, unit } )
+                            /**
+                             * Clone before onChange
+                             */
+                            onChange( cloneSpacing( { ...spacing, unit } ) )
                         }
                     />
                 </div>

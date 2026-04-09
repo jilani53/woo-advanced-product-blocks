@@ -13,6 +13,8 @@ const Style = ({ attributes, setAttributes }) => {
 		titleColor,
 		border,
 		spacing,
+		padding,
+		margin,
 		titleFontSize,
 		fontWeight,
 		lineHeight,
@@ -69,22 +71,28 @@ const Style = ({ attributes, setAttributes }) => {
 			/>
 
 			<SpacingControl
-                label={ __( "Padding", "wooapb" ) }
-                value={ spacing }
-                onChange={ ( newValue ) =>
-                    setAttributes( { spacing: newValue } )
-                }
-                device="desktop"
-            />
-			
+				label={ __( "Padding", "wooapb" ) }
+				value={ padding }
+				onChange={ ( val ) => setAttributes( { padding: val } ) }
+				min={ 0 }
+				max={ 200 }
+				step={ 1 }
+				units={ [ 'px', 'em', 'rem', '%' ] }
+				linked={ true }
+			/>
+
 			<SpacingControl
-                label={ __( "Margin", "wooapb" ) }
-                value={ spacing }
-                onChange={ ( newValue ) =>
-                    setAttributes( { spacing: newValue } )
-                }
-                device="desktop"
-            />
+				label={ __( "Margin", "wooapb" ) }
+				value={ margin }
+				onChange={ ( val ) => setAttributes( { margin: val } ) }
+				min={ 0 }
+				max={ 200 }
+				step={ 1 }
+				units={ [ 'px', 'em', 'rem', '%' ] }
+				linked={ true }
+			/>
+
+			
 
 			{/* <BoxControl
 				label="Margin"

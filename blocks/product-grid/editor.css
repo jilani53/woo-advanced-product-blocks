@@ -232,7 +232,7 @@
 
 .wooapb-spacing-input input {
     max-width: 45px;
-    min-height: 35px;
+    min-height: 30px;
     padding-right: 0;
     padding-left: 5px;
 }
@@ -241,6 +241,7 @@
     background: var(--wooapb-light-background-color);
     border: 1px solid var(--wooapb-light-border-color);
     padding: 15px;
+    height: 30px;
 }
 
 .wooapb-spacing-wrapper .components-base-control.components-select-control {
