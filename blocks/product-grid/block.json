@@ -106,7 +106,7 @@
 				}
 			}
 		},
-		"spacing": {
+		"padding": {
 			"type": "object",
 			"default": {
 				"desktop": {
@@ -132,7 +132,32 @@
 			},
 			"__experimentalRole": "style"
 		},
-		
+		"margin": {
+			"type": "object",
+			"default": {
+				"desktop": {
+					"top": "",
+					"right": "",
+					"bottom": "",
+					"left": ""
+				},
+				"tablet": {
+					"top": "",
+					"right": "",
+					"bottom": "",
+					"left": ""
+				},
+				"mobile": {
+					"top": "",
+					"right": "",
+					"bottom": "",
+					"left": ""
+				},
+				"unit": "px",
+				"linked": true
+			},
+			"__experimentalRole": "style"
+		},
 		"titleFontSize": {
 			"type": "string",
 			"default": ""

@@ -4,16 +4,18 @@ import { Button, SelectControl } from '@wordpress/components';
 
 const SIDES = [ 'top', 'right', 'bottom', 'left' ];
 const DEVICES = [ 'desktop', 'tablet', 'mobile' ];
-const UNITS = [ 'px', 'em', 'rem', '%', 'vw' ];
 
 const SpacingControl = ( {
     label,
     value = {},
     onChange,
     device = 'desktop',
+    min,
+    max,
+    step = 1,
 } ) => {
 
-    const UNITS = [
+    const UNIT_OPTIONS = [
         { label: 'PX', value: 'px' },
         { label: 'EM', value: 'em' },
         { label: 'REM', value: 'rem' },
@@ -21,6 +23,9 @@ const SpacingControl = ( {
         { label: 'VW', value: 'vw' },
     ];
 
+    /**
+     * Normalize spacing structure
+     */
     const spacing = useMemo( () => ( {
         desktop: {},
         tablet: {},
@@ -33,13 +38,37 @@ const SpacingControl = ( {
     const current = spacing?.[ device ] || {};
 
     /**
+     * Clamp helper (SAFE)
+     */
+    const clamp = ( val ) => {
+        if ( val === '' ) return '';
+
+        let num = Number( val );
+
+        if ( typeof min === 'number' && num < min ) num = min;
+        if ( typeof max === 'number' && num > max ) num = max;
+
+        return num;
+    };
+
+    /**
+     * Deep clone helper (prevents shared reference)
+     */
+    const cloneSpacing = ( obj ) => ( {
+        ...obj,
+        desktop: { ...( obj?.desktop || {} ) },
+        tablet: { ...( obj?.tablet || {} ) },
+        mobile: { ...( obj?.mobile || {} ) },
+    } );
+
+    /**
      * Update single side
      */
     const updateSide = useCallback( ( side, newValue ) => {
 
-        const val = newValue === '' ? '' : Number( newValue );
+        const val = newValue === '' ? '' : clamp( newValue );
 
-        let updated = { ...spacing };
+        const updated = { ...spacing };
 
         if ( spacing.linked ) {
             updated[ device ] = {
@@ -55,36 +84,38 @@ const SpacingControl = ( {
             };
         }
 
-        onChange( updated );
+        onChange( cloneSpacing( updated ) );
+
     }, [ spacing, device, current, onChange ] );
 
     /**
-     * Toggle link/unlink (Spectra behavior: keep current values)
+     * Toggle linked/unlinked
      */
     const toggleLinked = useCallback( () => {
 
-        const updated = { ...spacing };
+        const updated = {
+            ...spacing,
+            linked: ! spacing.linked,
+        };
 
-        updated.linked = ! spacing.linked;
-
-        onChange( updated );
+        onChange( cloneSpacing( updated ) );
 
     }, [ spacing, onChange ] );
 
     /**
-     * Unit change (Spectra keeps existing values untouched)
+     * Unit change
      */
     const changeUnit = useCallback( ( unit ) => {
 
-        onChange( {
+        onChange( cloneSpacing( {
             ...spacing,
             unit,
-        } );
+        } ) );
 
     }, [ spacing, onChange ] );
 
     /**
-     * Device-safe value getter (Spectra fallback chain)
+     * Get value safely
      */
     const getValue = useCallback( ( side ) => {
         return current?.[ side ] ?? '';
@@ -92,6 +123,7 @@ const SpacingControl = ( {
 
     return (
         <div className="wooapb-spacing-wrapper">
+
             {/* Header */}
             <div className="spectra-spacing-control__header">
                 <span>{ label }</span>
@@ -99,20 +131,21 @@ const SpacingControl = ( {
                 <div className="wooapb-spacing-control__unit">
                     <SelectControl
                         value={ spacing.unit || 'px' }
-                        options={ UNITS }
-                        onChange={ ( unit ) =>
-                            onChange( { ...spacing, unit } )
-                        }
+                        options={ UNIT_OPTIONS }
+                        onChange={ changeUnit }
                     />
                 </div>
             </div>
 
-            {/* Box Model UI */}
+            {/* Box Model */}
             <div className="spectra-spacing-control__box">
 
                 <div className="wooapb-spacing-input">
                     <input
                         type="number"
+                        min={ min }
+                        max={ max }
+                        step={ step }
                         value={ getValue( 'top' ) }
                         onChange={ ( e ) => updateSide( 'top', e.target.value ) }
                     />
@@ -121,6 +154,9 @@ const SpacingControl = ( {
                 <div className="wooapb-spacing-input">
                     <input
                         type="number"
+                        min={ min }
+                        max={ max }
+                        step={ step }
                         value={ getValue( 'left' ) }
                         onChange={ ( e ) => updateSide( 'left', e.target.value ) }
                     />
@@ -129,6 +165,9 @@ const SpacingControl = ( {
                 <div className="wooapb-spacing-input">
                     <input
                         type="number"
+                        min={ min }
+                        max={ max }
+                        step={ step }
                         value={ getValue( 'right' ) }
                         onChange={ ( e ) => updateSide( 'right', e.target.value ) }
                     />
@@ -137,6 +176,9 @@ const SpacingControl = ( {
                 <div className="wooapb-spacing-input">
                     <input
                         type="number"
+                        min={ min }
+                        max={ max }
+                        step={ step }
                         value={ getValue( 'bottom' ) }
                         onChange={ ( e ) => updateSide( 'bottom', e.target.value ) }
                     />
