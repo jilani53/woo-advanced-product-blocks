@@ -56,13 +56,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 setAttributes={setAttributes}
             />
 
-            <div className="wooapb-product-carousel__wrapper">
-                <div ref={wrapperRef}>
-                    <ServerSideRender
-                        block="wooapb/product-carousel"
-                        attributes={attributes}
-                    />
-                </div>
+            <div className="wooapb-product-carousel__wrapper" ref={wrapperRef}>
+                <ServerSideRender
+                    block="wooapb/product-carousel"
+                    attributes={attributes}
+                />
             </div>
         </div>
     );
