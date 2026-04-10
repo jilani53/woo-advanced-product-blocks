@@ -5,11 +5,12 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-function initWooapbCarousels() {
-	const elements = document.querySelectorAll('.wooapb-carousel');
+function initWooapbCarousels(root = document) {
+	const elements = root.querySelectorAll('.wooapb-carousel');
 
 	elements.forEach((el) => {
-		if (el.swiper) {
+		// Hard guard (better than el.swiper)
+		if (el.dataset.swiperInit === 'true') {
 			return;
 		}
 
@@ -26,6 +27,9 @@ function initWooapbCarousels() {
 				clickable: true,
 			},
 		});
+
+		// Mark initialized
+		el.dataset.swiperInit = 'true';
 	});
 }
 

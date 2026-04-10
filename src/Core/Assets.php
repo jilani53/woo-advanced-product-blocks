@@ -73,8 +73,8 @@ class Assets {
 		);
 
 		wp_register_script(
-			'wooapb-carousel',
-			plugins_url( 'blocks/product-carousel/view.js', WOOAPB_FILE ),
+			'wooapb-utils',
+			plugins_url( 'assets/shared/utils.js', WOOAPB_FILE ),
 			array( 'wooapb-swiper' ),
 			WOOAPB_VERSION,
 			true
@@ -88,5 +88,8 @@ class Assets {
 	 */
 	public static function enqueue() {
 		wp_enqueue_style( 'wooapb-base' );
+		wp_enqueue_style( 'wooapb-swiper' );
+		wp_enqueue_script( 'wooapb-swiper' );
+		wp_enqueue_script( 'wooapb-utils' );
 	}
 }

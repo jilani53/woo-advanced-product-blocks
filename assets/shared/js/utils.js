@@ -1,0 +1,6 @@
+import initWooapbCarousels from '../../../blocks/product-carousel/carousel-init';
+
+document.addEventListener('DOMContentLoaded', () => {
+	initWooapbCarousels(document);
+    alert('Utils loaded and carousels initialized!');
+});

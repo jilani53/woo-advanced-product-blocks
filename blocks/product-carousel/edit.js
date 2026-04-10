@@ -6,39 +6,64 @@ import { useStyleVars } from './editor-style';
 import initWooapbCarousels from './carousel-init';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
-	const wrapperRef = useRef();
+    const wrapperRef = useRef();
 
-	const blockProps = useBlockProps({
-		style: useStyleVars(attributes),
-		className: 'wooapb-product-carousel',
-	});
+    const blockProps = useBlockProps({
+        style: useStyleVars(attributes),
+        className: 'wooapb-product-carousel',
+    });
 
-	useEffect(() => {
-		if (!attributes.blockId && clientId) {
-			setAttributes({ blockId: clientId });
-		}
-	}, [clientId]);
+    useEffect(() => {
+        if (!wrapperRef.current) return;
 
-	useEffect(() => {
-		const timeout = setTimeout(() => {
-			if (wrapperRef.current) {
-				initWooapbCarousels(wrapperRef.current);
-			}
-		}, 100);
+        const root = wrapperRef.current;
 
-		return () => clearTimeout(timeout);
-	}, [attributes]);
+        const init = () => {
+            const el = root.querySelector('.wooapb-carousel');
+            if (el) {
+                initWooapbCarousels(root);
+            }
+        };
 
-	return (
-		<div {...blockProps} ref={wrapperRef}>
-			<Inspector attributes={attributes} setAttributes={setAttributes} />
+        // Run once (in case already rendered)
+        init();
 
-			<div className="wooapb-product-carousel__wrapper">
-				<ServerSideRender
-					block="wooapb/product-carousel"
-					attributes={attributes}
-				/>
-			</div>
-		</div>
-	);
+        // Observe SSR updates
+        const observer = new MutationObserver(() => {
+            init();
+        });
+
+        observer.observe(root, {
+            childList: true,
+            subtree: true,
+        });
+
+        return () => observer.disconnect();
+    }, []);
+
+    // Store blockId
+    useEffect(() => {
+        if (!attributes.blockId && clientId) {
+            setAttributes({ blockId: clientId });
+        }
+    }, [clientId]);
+
+    return (
+        <div {...blockProps}>
+            
+            <Inspector
+                attributes={attributes}
+                setAttributes={setAttributes}
+            />
+
+            <div className="wooapb-product-carousel__wrapper">
+                <div ref={wrapperRef}>
+                    <ServerSideRender
+                        block="wooapb/product-carousel"
+                        attributes={attributes}
+                    />
+                </div>
+            </div>
+        </div>
+    );
 }

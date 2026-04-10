@@ -1,8 +1,11 @@
 {
-  "name": "wooapb/product-carousel",
-  "title": "Woo Product Carousel",
-  "category": "woocommerce",
-  "icon": "slides",
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wooapb/product-carousel",
+	"title": "Woo Product Carousel",
+	"category": "woocommerce",
+	"icon": "slides",
+	"description": "Display WooCommerce products in a slider layout.",
   "supports": {
 		"html": false
 	},
