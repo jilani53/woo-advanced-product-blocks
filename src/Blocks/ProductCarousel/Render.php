@@ -29,7 +29,7 @@ class Render {
 	 */
 	public static function render( array $attributes ) {
 
-		$columns        = absint( $attributes['columns'] ?? 4 );
+		$columns        = absint( $attributes['columns'] ?? 3 );
 		$posts_per_page = absint( $attributes['postsPerPage'] ?? 4 );
 		$in_stock       = filter_var( $attributes['inStock'] ?? false, FILTER_VALIDATE_BOOLEAN );
 		$page           = absint( $attributes['page'] ?? 1 );
@@ -64,7 +64,7 @@ class Render {
 		$css = StyleBuilder::build( $attributes, $block_id );
 
 		$swiper_settings = array(
-			'slidesPerView' => $columns,
+			'slidesPerView' => 3,
 			'spaceBetween'  => 20,
 			'loop'          => false,
 		);

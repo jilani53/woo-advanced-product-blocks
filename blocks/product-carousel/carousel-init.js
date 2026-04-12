@@ -16,7 +16,7 @@ function initWooapbCarousels(root = document) {
 
 		new Swiper(el, {
 			modules: [Navigation, Pagination],
-			slidesPerView: 4,
+			slidesPerView: 3,
 			spaceBetween: 20,
 			navigation: {
 				nextEl: el.querySelector('.swiper-button-next'),

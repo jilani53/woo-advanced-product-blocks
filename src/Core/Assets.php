@@ -1,7 +1,7 @@
 <?php
 /**
  * Register assets for the plugin.
- * 
+ *
  * @package WooAPB\Core
  * @since 1.0.0
  */
@@ -74,7 +74,7 @@ class Assets {
 
 		wp_register_script(
 			'wooapb-utils',
-			plugins_url( 'assets/shared/utils.js', WOOAPB_FILE ),
+			plugins_url( 'assets/shared/js/utils.js', WOOAPB_FILE ),
 			array( 'wooapb-swiper' ),
 			WOOAPB_VERSION,
 			true
