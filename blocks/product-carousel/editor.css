@@ -297,7 +297,7 @@
 /**
  * Editor styles for the product title.
  */
-.wp-block-wooapb-product-grid .wooapb-product-grid .wc-block-grid__product-title {
+.wp-block-wooapb-product-carousel .wc-block-carousel__product-title {
 	color: var(--wooapb-product-card-title-color);
 	font-size: var(--wooapb-product-card-title-size);
 	font-weight: var(--wooapb-product-card-title-weight);

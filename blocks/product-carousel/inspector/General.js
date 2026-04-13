@@ -2,9 +2,9 @@ import { PanelBody, RangeControl, CheckboxControl } from '@wordpress/components'
 import { __ } from '@wordpress/i18n';
 
 const General = ({ attributes, setAttributes }) => {
-	const { columns, postsPerPage, inStock } = attributes;
+	const { slidesToShow, postsPerPage, inStock } = attributes;
 
-	// ✅ reusable helper
+	// Reusable helper
 	const updateAttr = (key, value) => {
 		setAttributes({ [key]: value });
 	};
@@ -12,9 +12,9 @@ const General = ({ attributes, setAttributes }) => {
 	return (
 		<PanelBody title={__('Grid Settings', 'wooapb')} initialOpen={true}>
 			<RangeControl
-				label={__('Columns', 'wooapb')}
-				value={columns}
-				onChange={(value) => updateAttr('columns', value)}
+				label={__('Slides to Show', 'wooapb')}
+				value={slidesToShow}
+				onChange={(value) => updateAttr('slidesToShow', value)}
 				min={1}
 				max={6}
 			/>

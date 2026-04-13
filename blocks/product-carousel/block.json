@@ -6,7 +6,7 @@
 	"category": "woocommerce",
 	"icon": "slides",
 	"description": "Display WooCommerce products in a slider layout.",
-  "supports": {
+  	"supports": {
 		"html": false
 	},
 	"attributes": {
@@ -21,7 +21,7 @@
 			"type": "string",
 			"default": ""
 		},
-		"columns": {
+		"slidesToShow": {
 			"type": "number",
 			"default": 4
 		},

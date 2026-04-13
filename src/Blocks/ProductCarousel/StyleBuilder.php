@@ -1,11 +1,11 @@
 <?php
 /**
- * Dynamic Style Builder for Product Grid Block.
+ * Dynamic Style Builder for Product Carousel Block.
  *
- * @package WooAPB\Blocks\ProductGrid
+ * @package WooAPB\Blocks\ProductCarousel
  */
 
-namespace WooAPB\Blocks\ProductGrid;
+namespace WooAPB\Blocks\ProductCarousel;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -26,7 +26,7 @@ class StyleBuilder {
 	public static function build( array $attributes, string $block_id ) {
 
 		$css      = '';
-		$selector = '#' . $block_id . ' .wc-block-grid__product-title';
+		$selector = '#' . $block_id . ' .wc-block-carousel__product-title';
 
 		// Title color.
 		if ( ! empty( $attributes['titleColor']['value'] ) ) {

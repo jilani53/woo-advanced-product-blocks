@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use WC_Product_Query;
 use WooAPB\Core\CssCollector;
-use WooAPB\Blocks\ProductGrid\StyleBuilder;
+use WooAPB\Blocks\ProductCarousel\StyleBuilder;
 
 /**
  * Renders the Product Carousel block on the frontend.
@@ -29,7 +29,7 @@ class Render {
 	 */
 	public static function render( array $attributes ) {
 
-		$columns        = absint( $attributes['columns'] ?? 3 );
+		$slides_to_show = absint( $attributes['slidesToShow'] ?? 3 );
 		$posts_per_page = absint( $attributes['postsPerPage'] ?? 4 );
 		$in_stock       = filter_var( $attributes['inStock'] ?? false, FILTER_VALIDATE_BOOLEAN );
 		$page           = absint( $attributes['page'] ?? 1 );
@@ -64,7 +64,7 @@ class Render {
 		$css = StyleBuilder::build( $attributes, $block_id );
 
 		$swiper_settings = array(
-			'slidesPerView' => 3,
+			'slidesPerView' => $slides_to_show,
 			'spaceBetween'  => 20,
 			'loop'          => false,
 		);
@@ -90,7 +90,7 @@ class Render {
 					<div class="swiper-slide">
 						<a href="<?php echo esc_url( $product->get_permalink() ); ?>">
 							<?php echo wp_kses_post( $product->get_image() ); ?>
-							<h3><?php echo esc_html( $product->get_name() ); ?></h3>
+							<h2 class="wc-block-carousel__product-title"><?php echo esc_html( $product->get_name() ); ?></h3>
 							<span><?php echo wp_kses_post( $product->get_price_html() ); ?></span>
 						</a>
 					</div>

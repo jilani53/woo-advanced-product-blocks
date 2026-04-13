@@ -5,7 +5,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-function initWooapbCarousels(root = document) {
+function initWooapbCarousels(root = document, attributes) {
 	const elements = root.querySelectorAll('.wooapb-carousel');
 
 	elements.forEach((el) => {
@@ -16,7 +16,7 @@ function initWooapbCarousels(root = document) {
 
 		new Swiper(el, {
 			modules: [Navigation, Pagination],
-			slidesPerView: 3,
+			slidesPerView: attributes.slidesToShow || 4,
 			spaceBetween: 20,
 			navigation: {
 				nextEl: el.querySelector('.swiper-button-next'),

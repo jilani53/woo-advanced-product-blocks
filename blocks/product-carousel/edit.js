@@ -21,7 +21,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         const init = () => {
             const el = root.querySelector('.wooapb-carousel');
             if (el) {
-                initWooapbCarousels(root);
+                initWooapbCarousels(root, attributes);
             }
         };
 
@@ -39,7 +39,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         });
 
         return () => observer.disconnect();
-    }, []);
+    }, [attributes]);
 
     // Store blockId
     useEffect(() => {
