@@ -27,7 +27,10 @@ class Plugin {
 	 * @return void
 	 */
 	public function init() {
+		// Register assets.
 		add_action( 'init', array( Assets::class, 'register' ) );
+
+		// Register blocks.
 		add_action( 'init', array( BlockRegistry::class, 'register' ) );
 
 		// Cache bust the product query cache when a product is saved or updated.
@@ -38,6 +41,7 @@ class Plugin {
 		add_action( 'enqueue_block_assets', array( Assets::class, 'enqueue' ), 20 );
 		add_action( 'wp_enqueue_scripts', array( Assets::class, 'enqueue' ), 20 );
 
+		// If block theme.
 		if ( wp_is_block_theme() ) {
 			add_action( 'wp_enqueue_scripts', array( CssCollector::class, 'output' ), 20 );
 		} else {
