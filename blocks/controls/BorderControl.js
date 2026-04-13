@@ -3,85 +3,120 @@ import {
     PanelBody,
     __experimentalBoxControl as BoxControl,
     SelectControl,
-    RangeControl,
+    ColorPalette,
+    ButtonGroup,
+    Button,
 } from '@wordpress/components';
+import { useState } from '@wordpress/element';
 
 /**
- * BorderControl (Reusable)
+ * BorderControl (Reusable + Scalable)
  *
- * Expected attribute shape:
+ * Expected value shape:
  * {
- *   border: {
+ *   normal: {
  *     width: { top, right, bottom, left },
  *     style: 'solid',
  *     color: '',
  *     radius: { top, right, bottom, left }
- *   }
+ *   },
+ *   hover: { ... }
  * }
  */
 
-const BorderControl = ({
-    label = __('Border', 'wooapb'),
+const DEFAULT_BORDER = {
+    width: { top: '', right: '', bottom: '', left: '' },
+    style: 'solid',
+    color: '',
+    radius: { top: '', right: '', bottom: '', left: '' },
+};
+
+const BorderControl = ( {
+    label = __( 'Border', 'wooapb' ),
     value = {},
     onChange,
-}) => {
+} ) => {
+    const [ state, setState ] = useState( 'normal' );
+
+    const current = value?.[ state ] || DEFAULT_BORDER;
+
     const border = {
-        width: value?.width || {},
-        style: value?.style || 'solid',
-        color: value?.color || '',
-        radius: value?.radius || {},
+        width: current?.width || DEFAULT_BORDER.width,
+        style: current?.style || DEFAULT_BORDER.style,
+        color: current?.color || DEFAULT_BORDER.color,
+        radius: current?.radius || DEFAULT_BORDER.radius,
     };
 
-    const update = (key, newValue) => {
-        onChange({
-            ...border,
-            [key]: newValue,
-        });
+    const update = ( key, newValue ) => {
+        onChange( {
+            ...value,
+            [ state ]: {
+                ...border,
+                [ key ]: newValue,
+            },
+        } );
     };
 
     return (
-        <PanelBody className='wooapb-border-wrapper' title={label} initialOpen={false}>
+        <PanelBody
+            className="wooapb-border-wrapper"
+            title={ label }
+            initialOpen={ false }
+        >
+            {/* State Switch */}
+            <ButtonGroup className="wooapb-border-button-switcher" aria-label={ __( 'Border State', 'wooapb' ) }>
+                <Button
+                    isPrimary={ state === 'normal' }
+                    onClick={ () => setState( 'normal' ) }
+                >
+                    { __( 'Normal', 'wooapb' ) }
+                </Button>
+                <Button
+                    isPrimary={ state === 'hover' }
+                    onClick={ () => setState( 'hover' ) }
+                >
+                    { __( 'Hover', 'wooapb' ) }
+                </Button>
+            </ButtonGroup>
+
+            {/* Border Style */}
             <SelectControl
-                label={__('Style', 'wooapb')}
-                value={border.style}
-                options={[
-                    { label: __('Solid', 'wooapb'), value: 'solid' },
-                    { label: __('Dashed', 'wooapb'), value: 'dashed' },
-                    { label: __('Dotted', 'wooapb'), value: 'dotted' },
-                    { label: __('None', 'wooapb'), value: 'none' },
-                ]}
-                onChange={(val) => update('style', val)}
+                label={ __( 'Style', 'wooapb' ) }
+                value={ border.style }
+                options={ [
+                    { label: __( 'Solid', 'wooapb' ), value: 'solid' },
+                    { label: __( 'Dashed', 'wooapb' ), value: 'dashed' },
+                    { label: __( 'Dotted', 'wooapb' ), value: 'dotted' },
+                    { label: __( 'Double', 'wooapb' ), value: 'double' },
+                    { label: __( 'None', 'wooapb' ), value: 'none' },
+                ] }
+                onChange={ ( val ) => update( 'style', val ) }
             />
 
-            <RangeControl
-                label={__('Width (px)', 'wooapb')}
-                value={border.width?.top || 0}
-                onChange={(val) =>
-                    update('width', {
-                        top: val,
-                        right: val,
-                        bottom: val,
-                        left: val,
-                    })
-                }
-                min={0}
-                max={20}
-            />
-
+            {/* Border Width */}
             <BoxControl
-                label={__('Radius (px)', 'wooapb')}
-                values={border.radius}
-                onChange={(val) => update('radius', val)}
-                min={0}
-                max={80}
+                label={ __( 'Width', 'wooapb' ) }
+                values={ border.width }
+                onChange={ ( val ) => update( 'width', val ) }
             />
 
-            <input
-                type="color"
-                value={border.color || '#000000'}
-                onChange={(e) => update('color', e.target.value)}
-                style={{ width: '100%', marginTop: '10px' }}
+            {/* Border Radius */}
+            <BoxControl
+                label={ __( 'Radius', 'wooapb' ) }
+                values={ border.radius }
+                onChange={ ( val ) => update( 'radius', val ) }
             />
+
+            {/* Border Color */}
+            <div className="wooapb-border-color-control">
+                <p style={ { marginBottom: '6px' } }>
+                    { __( 'Color', 'wooapb' ) }
+                </p>
+                <ColorPalette
+                    value={ border.color }
+                    onChange={ ( val ) => update( 'color', val ) }
+                />
+            </div>
         </PanelBody>
     );
 };

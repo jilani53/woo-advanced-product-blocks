@@ -1,8 +1,22 @@
-.wp-block-wooapb-product-grid .wooapb-grid {
-	display: grid;
-	gap: 24px;
+.wooapb-grid {
+    display: grid;
+    gap: 1.5rem;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    box-sizing: border-box;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
-.wp-block-wooapb-product-grid .wooapb-product {
-	text-align: center;
+/* Critical fix for grid overflow */
+.wooapb-grid > li {
+    min-width: 0;
+}
+
+/* Prevent image forcing overflow */
+.wooapb-grid img {
+    width: 100%;
+    height: auto;
+    display: block;
 }

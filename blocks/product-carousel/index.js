@@ -1,11 +1,10 @@
-// blocks/product-carousel/index.js
+import './editor.css';
+import './style.css';
+
 import { registerBlockType } from '@wordpress/blocks';
-import { useBlockProps } from '@wordpress/block-editor';
+import Edit from './edit';
 
 registerBlockType('wooapb/product-carousel', {
-	edit: () => {
-		const blockProps = useBlockProps();
-		return <div {...blockProps}>Woo Product Carousel (Editor Preview)</div>;
-	},
-	save: () => null, // Server-side rendered
+	edit: Edit,
+	save: () => null,
 });

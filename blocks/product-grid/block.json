@@ -1,122 +1,201 @@
 {
-  "$schema": "https://schemas.wp.org/trunk/block.json",
-  "apiVersion": 3,
-  "name": "wooapb/product-grid",
-  "title": "Woo Product Grid",
-  "category": "woocommerce",
-  "icon": "grid-view",
-  "description": "Display WooCommerce products in a grid layout.",
-  "supports": {
-    "html": false
-  },
-  "attributes": {
-    "title": {
-      "type": "string",
-      "default": ""
-    },
-    "description": {
-      "type": "string",
-      "default": ""
-    },
-    "columns": {
-      "type": "number",
-      "default": 4
-    },
-    "postsPerPage": {
-      "type": "number",
-      "default": 8
-    },
-    "inStock": {
-      "type": "boolean",
-      "default": false
-    },
-    "border": {
-      "type": "object",
-      "default": {
-        "width": {
-          "top": 0,
-          "right": 0,
-          "bottom": 0,
-          "left": 0
-        },
-        "style": "solid",
-        "color": "",
-        "radius": {
-          "top": 0,
-          "right": 0,
-          "bottom": 0,
-          "left": 0
-        }
-      }
-    },
-    "spacing": {
-      "desktop": {
-        "top": "",
-        "right": "",
-        "bottom": "",
-        "left": "",
-        "unit": "px",
-        "linked": true
-      },
-      "tablet": {
-        "top": "",
-        "right": "",
-        "bottom": "",
-        "left": "",
-        "unit": "px",
-        "linked": true
-      },
-      "mobile": {
-        "top": "",
-        "right": "",
-        "bottom": "",
-        "left": "",
-        "unit": "px",
-        "linked": true
-      }
-    },
-    "titleColor": {
-      "type": "string",
-      "default": ""
-    },
-    "titleFontSize": {
-      "type": "string",
-      "default": ""
-    },
-    "fontWeight": {
-      "type": "string",
-      "default": ""
-    },
-    "lineHeight": {
-      "type": "string",
-      "default": ""
-    },
-    "marginTop": {
-      "type": "string",
-      "default": ""
-    },
-    "marginBottom": {
-      "type": "string",
-      "default": ""
-    },
-    "paddingTop": {
-      "type": "string",
-      "default": ""
-    },
-    "paddingBottom": {
-      "type": "string",
-      "default": ""
-    },
-    "customClass": {
-      "type": "string",
-      "default": ""
-    },
-    "zIndex": {
-      "type": "string",
-      "default": ""
-    }
-  },
-  "editorScript": "file:../../build/product-grid/index.js",
-  "editorStyle": "file:./editor.css",
-  "style": "file:./style.css"
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wooapb/product-grid",
+	"title": "Woo Product Grid",
+	"category": "woocommerce",
+	"icon": "grid-view",
+	"description": "Display WooCommerce products in a grid layout.",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"blockId": {
+			"type": "string"
+		},
+		"title": {
+			"type": "string",
+			"default": ""
+		},
+		"description": {
+			"type": "string",
+			"default": ""
+		},
+		"columns": {
+			"type": "number",
+			"default": 4
+		},
+		"postsPerPage": {
+			"type": "number",
+			"default": 8
+		},
+		"inStock": {
+			"type": "boolean",
+			"default": false
+		},
+		"titleColor": {
+			"type": "object",
+			"default": {
+				"value": "",
+				"source": "custom",
+				"slug": null
+			}
+		},
+		"typography": {
+			"type": "object",
+			"default": {
+				"fontFamily": "",
+				"fontWeight": "",
+				"fontStyle": "",
+				"textTransform": "",
+				"textDecoration": "",
+				"fontSize": {
+					"desktop": "",
+					"tablet": "",
+					"mobile": "",
+					"unit": "px"
+				},
+				"lineHeight": {
+					"desktop": "",
+					"tablet": "",
+					"mobile": "",
+					"unit": "px"
+				},
+				"letterSpacing": {
+					"desktop": "",
+					"tablet": "",
+					"mobile": "",
+					"unit": "px"
+				}
+			}
+		},
+		"border": {
+			"type": "object",
+			"default": {
+				"normal": {
+					"width": {
+						"top": 0,
+						"right": 0,
+						"bottom": 0,
+						"left": 0
+					},
+					"style": "solid",
+					"color": "",
+					"radius": {
+						"top": 0,
+						"right": 0,
+						"bottom": 0,
+						"left": 0
+					}
+				},
+				"hover": {
+					"width": {
+						"top": 0,
+						"right": 0,
+						"bottom": 0,
+						"left": 0
+					},
+					"style": "solid",
+					"color": "",
+					"radius": {
+						"top": 0,
+						"right": 0,
+						"bottom": 0,
+						"left": 0
+					}
+				}
+			}
+		},
+		"padding": {
+			"type": "object",
+			"default": {
+				"desktop": {
+					"top": "",
+					"right": "",
+					"bottom": "",
+					"left": ""
+				},
+				"tablet": {
+					"top": "",
+					"right": "",
+					"bottom": "",
+					"left": ""
+				},
+				"mobile": {
+					"top": "",
+					"right": "",
+					"bottom": "",
+					"left": ""
+				},
+				"unit": "px",
+				"linked": true
+			},
+			"__experimentalRole": "style"
+		},
+		"margin": {
+			"type": "object",
+			"default": {
+				"desktop": {
+					"top": "",
+					"right": "",
+					"bottom": "",
+					"left": ""
+				},
+				"tablet": {
+					"top": "",
+					"right": "",
+					"bottom": "",
+					"left": ""
+				},
+				"mobile": {
+					"top": "",
+					"right": "",
+					"bottom": "",
+					"left": ""
+				},
+				"unit": "px",
+				"linked": true
+			},
+			"__experimentalRole": "style"
+		},
+		"titleFontSize": {
+			"type": "string",
+			"default": ""
+		},
+		"fontWeight": {
+			"type": "string",
+			"default": ""
+		},
+		"lineHeight": {
+			"type": "string",
+			"default": ""
+		},
+		"marginTop": {
+			"type": "string",
+			"default": ""
+		},
+		"marginBottom": {
+			"type": "string",
+			"default": ""
+		},
+		"paddingTop": {
+			"type": "string",
+			"default": ""
+		},
+		"paddingBottom": {
+			"type": "string",
+			"default": ""
+		},
+		"customClass": {
+			"type": "string",
+			"default": ""
+		},
+		"zIndex": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"editorScript": "file:../../build/product-grid/index.js",
+	"editorStyle": "file:./editor.css",
+	"style": "file:./style.css"
 }

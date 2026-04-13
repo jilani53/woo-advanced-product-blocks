@@ -1,15 +1,12 @@
 <?php
 /**
  * Regier all blocks
- * 
+ *
  * @package WooAPB\Core
  * @since 1.0.0
  */
 
 namespace WooAPB\Core;
-
-use WooAPB\Blocks\ProductGrid\Render as GridRender;
-use WooAPB\Blocks\ProductCarousel\Render as CarouselRender;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.

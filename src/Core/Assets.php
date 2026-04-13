@@ -1,7 +1,7 @@
 <?php
 /**
  * Register assets for the plugin.
- * 
+ *
  * @package WooAPB\Core
  * @since 1.0.0
  */
@@ -48,36 +48,34 @@ class Assets {
 			true
 		);
 
-		/* Grid */
-		wp_register_style(
-			'wooapb-grid',
-			plugins_url( 'blocks/product-grid/style.css', WOOAPB_FILE ),
-			array( 'wooapb-base' ),
-			WOOAPB_VERSION
-		);
-
 		wp_register_script(
-			'wooapb-grid',
-			plugins_url( 'blocks/product-grid/view.js', WOOAPB_FILE ),
-			array(),
-			WOOAPB_VERSION,
-			true
-		);
-
-		/* Carousel */
-		wp_register_style(
-			'wooapb-carousel',
-			plugins_url( 'blocks/product-carousel/style.css', WOOAPB_FILE ),
-			array( 'wooapb-base', 'wooapb-swiper' ),
-			WOOAPB_VERSION
-		);
-
-		wp_register_script(
-			'wooapb-carousel',
-			plugins_url( 'blocks/product-carousel/view.js', WOOAPB_FILE ),
+			'wooapb-utils',
+			plugins_url( 'assets/shared/js/utils.js', WOOAPB_FILE ),
 			array( 'wooapb-swiper' ),
 			WOOAPB_VERSION,
 			true
+		);
+	}
+
+	/**
+	 * Enqueue assets.
+	 *
+	 * @return void
+	 */
+	public static function enqueue() {
+		wp_enqueue_style( 'wooapb-base' );
+		wp_enqueue_style( 'wooapb-swiper' );
+		wp_enqueue_script( 'wooapb-swiper' );
+		wp_enqueue_script( 'wooapb-utils' );
+
+		// Localize script.
+		wp_localize_script(
+			'wooapb-utils',
+			'wooapb',
+			array(
+				'ajax_url' => admin_url( 'admin-ajax.php' ),
+				'nonce'    => wp_create_nonce( 'wooapb_load_more' ),
+			)
 		);
 	}
 }

@@ -5,6 +5,7 @@
  * Version: 1.0.0
  * Author: Jilani Ahmed
  * License: GPL-2.0-or-later
+ * Requires Plugins: woocommerce
  *
  * @package Woo_Advanced_Product_Blocks
  */
@@ -18,19 +19,41 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 use WooAPB\Core\Plugin;
 
-( new Plugin() )->init();
+/**
+ * Check WooCommerce dependency
+ */
+function wooapb_is_woocommerce_active() {
+	return class_exists( 'WooCommerce' );
+}
 
+/**
+ * Show admin notice if missing WooCommerce
+ */
+function wooapb_missing_wc_notice() {
 
+	if ( ! current_user_can( 'activate_plugins' ) ) {
+		return;
+	}
+	?>
+	<div class="notice notice-error">
+		<p>
+			<?php esc_html_e( 'Woo Advanced Product Blocks requires WooCommerce to be installed and active.', 'woo-advanced-product-blocks' ); ?>
+		</p>
+	</div>
+	<?php
+}
 
-// add_filter(
-// 	'woocommerce_blocks_product_attributes',
-// 	function ( $attributes, $product ) {
+/**
+ * Bootstrap plugin safely
+ */
+function wooapb_init() {
 
-// 		// Example: get badge from product meta
-// 		$attributes['my_custom_badge'] = $product->get_meta( '_my_custom_badge' );
+	if ( ! wooapb_is_woocommerce_active() ) {
+		add_action( 'admin_notices', 'wooapb_missing_wc_notice' );
+		return;
+	}
 
-// 		return $attributes;
-// 	},
-// 	10,
-// 	2
-// );
+	$plugin = new Plugin();
+	$plugin->init();
+}
+add_action( 'plugins_loaded', 'wooapb_init', 20 );
