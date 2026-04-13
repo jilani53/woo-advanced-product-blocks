@@ -197,5 +197,9 @@
 	},
 	"editorScript": "file:../../build/product-carousel/index.js",
 	"editorStyle": "file:./editor.css",
-	"style": "file:./style.css"
+	"viewScript": "wooapb-carousel-init",
+	"style": [
+		"file:./style.css",
+		"wooapb-swiper"
+	]
 }

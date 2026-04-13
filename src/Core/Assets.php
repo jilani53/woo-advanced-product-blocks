@@ -49,9 +49,17 @@ class Assets {
 		);
 
 		wp_register_script(
-			'wooapb-utils',
-			plugins_url( 'assets/shared/js/utils.js', WOOAPB_FILE ),
+			'wooapb-carousel-init',
+			plugins_url( 'assets/shared/js/carousel-init.js', WOOAPB_FILE ),
 			array( 'wooapb-swiper' ),
+			WOOAPB_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'wooapb-load-more',
+			plugins_url( 'assets/shared/js/load-more.js', WOOAPB_FILE ),
+			array(),
 			WOOAPB_VERSION,
 			true
 		);
@@ -64,13 +72,11 @@ class Assets {
 	 */
 	public static function enqueue() {
 		wp_enqueue_style( 'wooapb-base' );
-		wp_enqueue_style( 'wooapb-swiper' );
-		wp_enqueue_script( 'wooapb-swiper' );
-		wp_enqueue_script( 'wooapb-utils' );
+		wp_enqueue_script( 'wooapb-load-more' );
 
 		// Localize script.
 		wp_localize_script(
-			'wooapb-utils',
+			'wooapb-load-more',
 			'wooapb',
 			array(
 				'ajax_url' => admin_url( 'admin-ajax.php' ),

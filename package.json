@@ -2,7 +2,7 @@
     "name": "woo-advanced-product-blocks",
     "version": "1.0.0",
     "description": "Advanced WooCommerce product blocks (Grid, Carousel, Filters) built with Gutenberg.",
-    "author": "Your Company",
+    "author": "Jilani Ahmed",
     "license": "GPL-2.0-or-later",
     "scripts": {
         "build": "wp-scripts build",

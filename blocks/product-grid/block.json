@@ -197,5 +197,6 @@
 	},
 	"editorScript": "file:../../build/product-grid/index.js",
 	"editorStyle": "file:./editor.css",
+	"viewScript": "wooapb-load-more",
 	"style": "file:./style.css"
 }

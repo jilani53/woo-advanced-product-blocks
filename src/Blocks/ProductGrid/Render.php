@@ -88,19 +88,10 @@ class Render {
 		ob_start();
 		?>
 
-		<div
-			id="<?php echo esc_attr( $block_id ); ?>"
-			class="wooapb-product-grid-wrapper"
-			data-wooapb='<?php echo wp_json_encode( $payload ); ?>'
-		>
-
-			<ul class="wooapb-grid products columns-<?php echo esc_attr( $columns ); ?>"
-				style="grid-template-columns: repeat(<?php echo esc_attr( $columns ); ?>, 1fr);">
-
+		<div id="<?php echo esc_attr( $block_id ); ?>" class="wooapb-product-grid-wrapper" data-wooapb='<?php echo wp_json_encode( $payload ); ?>'>
+			<ul class="wooapb-grid products columns-<?php echo esc_attr( $columns ); ?>" style="grid-template-columns: repeat(<?php echo esc_attr( $columns ); ?>, 1fr);">
 				<?php foreach ( $products as $product ) : ?>
-					<li class="wc-block-grid__product"
-						data-product-id="<?php echo esc_attr( $product->get_id() ); ?>">
-
+					<li class="wc-block-grid-product" data-product-id="<?php echo esc_attr( $product->get_id() ); ?>">
 						<a href="<?php echo esc_url( get_permalink( $product->get_id() ) ); ?>">
 							<?php echo wp_kses_post( $product->get_image() ); ?>
 
@@ -108,22 +99,19 @@ class Render {
 								<h2 class="wc-block-grid__product-title">
 									<?php echo esc_html( $product->get_name() ); ?>
 								</h2>
-
-								<span class="wc-block-grid__product-price">
-									<?php echo wp_kses_post( $product->get_price_html() ); ?>
-								</span>
+								<span><?php echo wp_kses_post( $product->get_price_html() ); ?></span>
 							</div>
 						</a>
-
 					</li>
 				<?php endforeach; ?>
 
 			</ul>
 
-			<button type="button" class="wooapb-load-more button is-primary">
-				<?php esc_html_e( 'Load More', 'woo-advanced-product-blocks' ); ?>
-			</button>
-
+			<div class="wooapb-load-more-button-wrapper">
+				<button type="button" class="wooapb-load-more button is-primary">
+					<?php esc_html_e( 'Load More', 'woo-advanced-product-blocks' ); ?>
+				</button>
+			</div>
 		</div>
 
 		<?php
