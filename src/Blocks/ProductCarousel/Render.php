@@ -47,16 +47,27 @@ class Render {
 			$query_args['stock_status'] = 'instock';
 		}
 
-		$query       = new WC_Product_Query( $query_args );
-		$product_ids = $query->get_products();
+		/**
+		 * Generate cache key (stable + unique per query)
+		 */
+		$version     = (int) get_option( 'wooapb_cache_version', 1 );
+		$cache_key   = 'wooapb_products_' . $version . '_' . md5( wp_json_encode( $query_args ) );
+		$cache_group = 'wooapb_products';
 
-		if ( empty( $product_ids ) ) {
-			return '<p>No products found.</p>';
+		$product_ids = wp_cache_get( $cache_key, $cache_group );
+
+		if ( false === $product_ids ) {
+			$query       = new WC_Product_Query( $query_args );
+			$product_ids = $query->get_products();
+
+			wp_cache_set( $cache_key, $product_ids, $cache_group, 5 * MINUTE_IN_SECONDS );
 		}
 
-		$block_id = ! empty( $attributes['blockId'] )
-			? 'wooapb-' . sanitize_key( $attributes['blockId'] )
-			: 'wooapb-product-carousel';
+		if ( empty( $product_ids ) ) {
+			return sprintf( '<p>%s</p>', esc_html__( 'No products found.', 'woo-advanced-product-blocks' ) );
+		}
+
+		$block_id = ! empty( $attributes['blockId'] ) ? 'wooapb-' . sanitize_key( $attributes['blockId'] ) : 'wooapb-product-carousel';
 
 		/**
 		 * Dynamic CSS builder
@@ -71,14 +82,8 @@ class Render {
 
 		ob_start();
 		?>
-		<div
-			id="<?php echo esc_attr( $block_id ); ?>"
-			class="wooapb-carousel swiper"
-			data-swiper='<?php echo esc_attr( wp_json_encode( $swiper_settings ) ); ?>'
-		>
-
+		<div id="<?php echo esc_attr( $block_id ); ?>" class="wooapb-carousel swiper" data-swiper='<?php echo esc_attr( wp_json_encode( $swiper_settings ) ); ?>'>
 			<div class="swiper-wrapper">
-
 				<?php foreach ( $product_ids as $product ) : ?>
 					<?php $product = wc_get_product( $product ); ?>
 					<?php
@@ -90,7 +95,7 @@ class Render {
 					<div class="swiper-slide">
 						<a href="<?php echo esc_url( $product->get_permalink() ); ?>">
 							<?php echo wp_kses_post( $product->get_image() ); ?>
-							<h2 class="wc-block-carousel__product-title"><?php echo esc_html( $product->get_name() ); ?></h3>
+							<h2 class="wc-block-carousel__product-title"><?php echo esc_html( $product->get_name() ); ?></h2>
 							<span><?php echo wp_kses_post( $product->get_price_html() ); ?></span>
 						</a>
 					</div>
@@ -106,9 +111,6 @@ class Render {
 		</div>
 		<?php
 
-		/**
-		 * Render once in footer
-		 */
 		if ( ! empty( $css ) ) {
 			CssCollector::add( $css );
 		}

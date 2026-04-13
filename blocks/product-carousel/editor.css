@@ -4,13 +4,15 @@
     --wooapb-light-border-color: #dddddd;
 }
 
-.wp-block-wooapb-product-grid {
+.wp-block-wooapb-product-grid,
+.wp-block-wooapb-product-carousel {
 	background: var(--wooapb-light-background-color);
 	padding: 16px;
     border-radius: 4px;
 }
 
-.wp-block-wooapb-product-grid {
+.wp-block-wooapb-product-grid,
+.wp-block-wooapb-product-carousel {
     border: 1px dashed var(--wooapb-light-border-color);
 }
 
@@ -197,7 +199,8 @@
     font-size: 13px;
 }
 
-.wooapb-tabs .components-grid {
+.wooapb-tabs .components-grid,
+.wooapb-tabs .components-carousel {
     align-items: center;
     margin-bottom: 20px;
     padding-bottom: 20px;
