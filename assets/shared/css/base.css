@@ -21,3 +21,91 @@
 .wooapb-product-content {
     padding: 12px;
 }
+
+.wooapb-product-grid-wrapper {
+	position: relative;
+}
+
+/* Load More button wrapper alignment */
+.wooapb-load-more {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+
+	margin: 24px auto 0;
+	padding: 12px 22px;
+
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 1;
+
+	border-radius: 6px;
+	border: 1px solid #1f1f1f;
+
+	background: #1f1f1f;
+	color: #ffffff;
+
+	cursor: pointer;
+	transition: all 0.25s ease-in-out;
+
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Center button under grid */
+.wooapb-product-grid-wrapper .wooapb-load-more {
+	display: block;
+}
+
+/* Hover state */
+.wooapb-load-more:hover {
+	background: #ffffff;
+	color: #1f1f1f;
+	border-color: #1f1f1f;
+	box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Active (click feedback) */
+.wooapb-load-more:active {
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Focus accessibility */
+.wooapb-load-more:focus {
+	outline: 2px solid #4c9ffe;
+	outline-offset: 2px;
+}
+
+/* Disabled state (loading) */
+.wooapb-load-more:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+	transform: none;
+	box-shadow: none;
+}
+
+/* Loading spinner effect */
+.wooapb-load-more.is-loading {
+	position: relative;
+	pointer-events: none;
+	color: transparent;
+}
+
+.wooapb-load-more.is-loading::after {
+	content: "";
+	width: 16px;
+	height: 16px;
+
+	border: 2px solid rgba(255, 255, 255, 0.4);
+	border-top-color: #fff;
+	border-radius: 50%;
+
+	position: absolute;
+	animation: wooapb-spin 0.8s linear infinite;
+}
+
+@keyframes wooapb-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}

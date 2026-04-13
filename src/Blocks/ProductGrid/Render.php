@@ -30,11 +30,11 @@ class Render {
 		$columns        = absint( $attributes['columns'] ?? 4 );
 		$posts_per_page = absint( $attributes['postsPerPage'] ?? 4 );
 		$in_stock       = filter_var( $attributes['inStock'] ?? false, FILTER_VALIDATE_BOOLEAN );
-		$page           = absint( $attributes['page'] ?? 1 );
+		$page           = 1; // always start from first page on initial render.
 
 		$query_args = array(
 			'limit'   => $posts_per_page,
-			'page'    => $page,
+			'offset'  => 0,
 			'status'  => 'publish',
 			'orderby' => $attributes['orderby'] ?? 'date',
 			'order'   => $attributes['order'] ?? 'DESC',
@@ -58,7 +58,6 @@ class Render {
 			$query       = new WC_Product_Query( $query_args );
 			$product_ids = $query->get_products();
 
-			// Store in object cache (persistent if Redis/Memcached exists).
 			wp_cache_set( $cache_key, $product_ids, $cache_group, 5 * MINUTE_IN_SECONDS );
 		}
 
@@ -66,9 +65,6 @@ class Render {
 			return sprintf( '<p>%s</p>', esc_html__( 'No products found.', 'woo-advanced-product-blocks' ) );
 		}
 
-		/**
-		 * Generate unique block ID
-		 */
 		$block_id = ! empty( $attributes['blockId'] ) ? 'wooapb-' . sanitize_key( $attributes['blockId'] ) : 'wooapb-product-grid';
 
 		/**
@@ -76,33 +72,62 @@ class Render {
 		 */
 		$css = StyleBuilder::build( $attributes, $block_id );
 
-		// Lazy load product objects only when needed.
 		$products = array_map( 'wc_get_product', $product_ids );
+
+		/**
+		 * Load More payload (for JS usage)
+		 */
+		$payload = array(
+			'blockId'      => $block_id,
+			'columns'      => $columns,
+			'postsPerPage' => $posts_per_page,
+			'attributes'   => $attributes,
+			'currentPage'  => 1,
+		);
 
 		ob_start();
 		?>
-		<div id="<?php echo esc_attr( $block_id ); ?>">
-			<ul class="wooapb-grid products columns-<?php echo esc_attr( $columns ); ?>" style="grid-template-columns: repeat(<?php echo esc_attr( $columns ); ?>, 1fr);">
+
+		<div
+			id="<?php echo esc_attr( $block_id ); ?>"
+			class="wooapb-product-grid-wrapper"
+			data-wooapb='<?php echo wp_json_encode( $payload ); ?>'
+		>
+
+			<ul class="wooapb-grid products columns-<?php echo esc_attr( $columns ); ?>"
+				style="grid-template-columns: repeat(<?php echo esc_attr( $columns ); ?>, 1fr);">
+
 				<?php foreach ( $products as $product ) : ?>
 					<li class="wc-block-grid__product"
-						data-product-id="<?php echo esc_attr( $product->get_id() ); ?>"
-					>
+						data-product-id="<?php echo esc_attr( $product->get_id() ); ?>">
+
 						<a href="<?php echo esc_url( get_permalink( $product->get_id() ) ); ?>">
 							<?php echo wp_kses_post( $product->get_image() ); ?>
+
 							<div class="wooapb-product-content">
-								<h2 class="wc-block-grid__product-title"><?php echo esc_html( $product->get_name() ); ?></h2>
-								<span class="wc-block-grid__product-price"><?php echo wp_kses_post( $product->get_price_html() ); ?></span>
+								<h2 class="wc-block-grid__product-title">
+									<?php echo esc_html( $product->get_name() ); ?>
+								</h2>
+
+								<span class="wc-block-grid__product-price">
+									<?php echo wp_kses_post( $product->get_price_html() ); ?>
+								</span>
 							</div>
 						</a>
+
 					</li>
 				<?php endforeach; ?>
+
 			</ul>
+
+			<button type="button" class="wooapb-load-more button is-primary">
+				<?php esc_html_e( 'Load More', 'woo-advanced-product-blocks' ); ?>
+			</button>
+
 		</div>
 
 		<?php
-		/**
-		 * Render once in footer
-		 */
+
 		if ( ! empty( $css ) ) {
 			CssCollector::add( $css );
 		}

@@ -67,5 +67,15 @@ class Assets {
 		wp_enqueue_style( 'wooapb-swiper' );
 		wp_enqueue_script( 'wooapb-swiper' );
 		wp_enqueue_script( 'wooapb-utils' );
+
+		// Localize script.
+		wp_localize_script(
+			'wooapb-utils',
+			'wooapb',
+			array(
+				'ajax_url' => admin_url( 'admin-ajax.php' ),
+				'nonce'    => wp_create_nonce( 'wooapb_load_more' ),
+			)
+		);
 	}
 }

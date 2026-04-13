@@ -14,6 +14,7 @@ if ( ! function_exists( 'add_action' ) ) {
 
 use WooAPB\Core\Assets;
 use WooAPB\Core\CssCollector;
+use WooAPB\Core\Ajax;
 
 /**
  * Core files entry point.
@@ -42,6 +43,10 @@ class Plugin {
 		} else {
 			add_action( 'wp_footer', array( CssCollector::class, 'output' ) );
 		}
+
+		// Ajax load more.
+		add_action( 'wp_ajax_wooapb_load_more_products', array( Ajax::class, 'ajax_load_more' ) );
+		add_action( 'wp_ajax_nopriv_wooapb_load_more_products', array( Ajax::class, 'ajax_load_more' ) );
 	}
 
 	/**
