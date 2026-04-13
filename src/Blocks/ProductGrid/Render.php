@@ -89,8 +89,10 @@ class Render {
 					>
 						<a href="<?php echo esc_url( get_permalink( $product->get_id() ) ); ?>">
 							<?php echo wp_kses_post( $product->get_image() ); ?>
-							<h2 class="wc-block-grid__product-title"><?php echo esc_html( $product->get_name() ); ?></h2>
-							<span class="wc-block-grid__product-price"><?php echo wp_kses_post( $product->get_price_html() ); ?></span>
+							<div class="wooapb-product-content">
+								<h2 class="wc-block-grid__product-title"><?php echo esc_html( $product->get_name() ); ?></h2>
+								<span class="wc-block-grid__product-price"><?php echo wp_kses_post( $product->get_price_html() ); ?></span>
+							</div>
 						</a>
 					</li>
 				<?php endforeach; ?>

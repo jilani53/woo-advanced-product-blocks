@@ -297,6 +297,10 @@
     padding: 15px;
 }
 
+.wooapb-carousel .swiper-slide img {
+    width: 100%;
+}
+
 /**
  * Editor styles for the product title.
  */

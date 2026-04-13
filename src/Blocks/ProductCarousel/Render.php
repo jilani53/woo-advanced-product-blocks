@@ -95,8 +95,10 @@ class Render {
 					<div class="swiper-slide">
 						<a href="<?php echo esc_url( $product->get_permalink() ); ?>">
 							<?php echo wp_kses_post( $product->get_image() ); ?>
-							<h2 class="wc-block-carousel__product-title"><?php echo esc_html( $product->get_name() ); ?></h2>
-							<span><?php echo wp_kses_post( $product->get_price_html() ); ?></span>
+							<div class="wooapb-product-content">
+								<h2 class="wc-block-carousel__product-title"><?php echo esc_html( $product->get_name() ); ?></h2>
+								<span><?php echo wp_kses_post( $product->get_price_html() ); ?></span>
+							</div>
 						</a>
 					</div>
 

@@ -6,16 +6,16 @@
 	list-style: none;
 }
 
-.wp-block-wooapb-product-grid .wooapb-grid img {
+.wp-block-wooapb-product-grid .wooapb-grid img,
+.wp-block-wooapb-product-carousels .swiper-slide img {
     max-width: 100%;
     height: auto;
     display: block;
 }
 
-.swiper-slide {
+.wp-block-wooapb-product-carousels .swiper-slide {
 	overflow: hidden;
 }
-
 
 .wp-block-wooapb-product-grid .wooapb-product {
 	text-align: center;

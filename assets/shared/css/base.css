@@ -6,3 +6,18 @@
 .wooapb-grid article {
     list-style: none;
 }
+
+.wooapb-grid.products li,
+.wooapb-carousel .swiper-slide {
+    list-style: none;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+}
+
+.wooapb-carousel .swiper-slide img {
+    width: 100%;
+}
+
+.wooapb-product-content {
+    padding: 12px;
+}
