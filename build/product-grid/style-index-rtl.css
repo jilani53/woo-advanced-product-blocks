@@ -1,1 +1,1 @@
-.wp-block-wooapb-product-grid .wooapb-grid{display:grid;gap:24px;list-style:none;margin:0;padding:0}.wp-block-wooapb-product-grid .wooapb-product{text-align:center}
+.wooapb-grid{box-sizing:border-box;display:grid;gap:1.5rem;grid-template-columns:repeat(4,minmax(0,1fr));list-style:none;margin:0;padding:0;width:100%}.wooapb-grid>li{min-width:0}.wooapb-grid img{display:block;height:auto;width:100%}
