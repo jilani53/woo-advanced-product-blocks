@@ -37,7 +37,7 @@ function wooapb_missing_wc_notice() {
 	?>
 	<div class="notice notice-error">
 		<p>
-			<?php esc_html_e( 'Woo Advanced Product Blocks requires WooCommerce to be installed and active.', 'woo-advanced-product-blocks' ); ?>
+			<?php esc_html_e( 'Woo Advanced Product Blocks requires WooCommerce to be installed and active.', 'wooapb' ); ?>
 		</p>
 	</div>
 	<?php
