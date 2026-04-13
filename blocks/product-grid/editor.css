@@ -241,8 +241,14 @@
 .wooapb-spacing-wrapper .components-button.has-icon {
     background: var(--wooapb-light-background-color);
     border: 1px solid var(--wooapb-light-border-color);
+    margin-top: -18px;
     padding: 15px;
     height: 30px;
+}
+
+span.wooapb-spacing-input__label {
+    font-size: 12px;
+    color: #9c9c9c;
 }
 
 .wooapb-spacing-wrapper .components-base-control.components-select-control {

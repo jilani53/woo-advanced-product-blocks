@@ -3,6 +3,14 @@ import { useCallback, useMemo } from '@wordpress/element';
 import { Button, SelectControl } from '@wordpress/components';
 
 const SIDES = [ 'top', 'right', 'bottom', 'left' ];
+
+const SIDES_UI = [
+    { key: 'top', label: 'Top' },
+    { key: 'right', label: 'Right' },
+    { key: 'bottom', label: 'Bottom' },
+    { key: 'left', label: 'Left' },
+];
+
 const DEVICES = [ 'desktop', 'tablet', 'mobile' ];
 
 const SpacingControl = ( {
@@ -38,7 +46,7 @@ const SpacingControl = ( {
     const current = spacing?.[ device ] || {};
 
     /**
-     * Clamp helper (SAFE)
+     * Clamp helper (handles empty string as well for controlled input)
      */
     const clamp = ( val ) => {
         if ( val === '' ) return '';
@@ -52,7 +60,7 @@ const SpacingControl = ( {
     };
 
     /**
-     * Deep clone helper (prevents shared reference)
+     * Deep clone helper
      */
     const cloneSpacing = ( obj ) => ( {
         ...obj,
@@ -140,49 +148,21 @@ const SpacingControl = ( {
             {/* Box Model */}
             <div className="spectra-spacing-control__box">
 
-                <div className="wooapb-spacing-input">
-                    <input
-                        type="number"
-                        min={ min }
-                        max={ max }
-                        step={ step }
-                        value={ getValue( 'top' ) }
-                        onChange={ ( e ) => updateSide( 'top', e.target.value ) }
-                    />
-                </div>
-
-                <div className="wooapb-spacing-input">
-                    <input
-                        type="number"
-                        min={ min }
-                        max={ max }
-                        step={ step }
-                        value={ getValue( 'left' ) }
-                        onChange={ ( e ) => updateSide( 'left', e.target.value ) }
-                    />
-                </div>
-
-                <div className="wooapb-spacing-input">
-                    <input
-                        type="number"
-                        min={ min }
-                        max={ max }
-                        step={ step }
-                        value={ getValue( 'right' ) }
-                        onChange={ ( e ) => updateSide( 'right', e.target.value ) }
-                    />
-                </div>
-
-                <div className="wooapb-spacing-input">
-                    <input
-                        type="number"
-                        min={ min }
-                        max={ max }
-                        step={ step }
-                        value={ getValue( 'bottom' ) }
-                        onChange={ ( e ) => updateSide( 'bottom', e.target.value ) }
-                    />
-                </div>
+                { SIDES_UI.map( ( side ) => (
+                    <div className="wooapb-spacing-input" key={ side.key }>
+                        <input
+                            type="number"
+                            min={ min }
+                            max={ max }
+                            step={ step }
+                            value={ getValue( side.key ) }
+                            onChange={ ( e ) =>
+                                updateSide( side.key, e.target.value )
+                            }
+                        />
+                        <span className="wooapb-spacing-input__label">{ side.label }</span>
+                    </div>
+                ) ) }
 
                 <Button
                     icon={ spacing.linked ? 'admin-links' : 'editor-unlink' }
@@ -191,7 +171,6 @@ const SpacingControl = ( {
                 />
 
             </div>
-
         </div>
     );
 };
