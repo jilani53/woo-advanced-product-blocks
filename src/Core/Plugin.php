@@ -48,9 +48,40 @@ class Plugin {
 			add_action( 'wp_footer', array( CssCollector::class, 'output' ) );
 		}
 
+		// Show admin notice if missing WooCommerce.
+		if ( ! $this->is_woocommerce_active() ) {
+			add_action( 'admin_notices', array( $this, 'wooapb_missing_wc_notice' ) );
+			return;
+		}
+
 		// Ajax load more.
 		add_action( 'wp_ajax_wooapb_load_more_products', array( Ajax::class, 'ajax_load_more' ) );
 		add_action( 'wp_ajax_nopriv_wooapb_load_more_products', array( Ajax::class, 'ajax_load_more' ) );
+	}
+
+	/**
+	 * Check WooCommerce dependency
+	 */
+	private function is_woocommerce_active() {
+		return class_exists( 'WooCommerce' );
+	}
+
+	/**
+	 * Show admin notice if missing WooCommerce
+	 */
+	public function missing_wc_notice() {
+
+		if ( ! current_user_can( 'activate_plugins' ) ) {
+			return;
+		}
+		?>
+
+		<div class="notice notice-error">
+			<p>
+				<?php esc_html_e( 'Woo Advanced Product Blocks requires WooCommerce to be installed and active.', 'wooapb' ); ?>
+			</p>
+		</div>
+		<?php
 	}
 
 	/**

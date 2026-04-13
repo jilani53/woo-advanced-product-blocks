@@ -27,28 +27,27 @@
 }
 
 /* Load More button wrapper alignment */
+.wooapb-load-more-button-wrapper {
+	text-align: center;
+	margin: 30px auto 50px auto;
+}
+
 .wooapb-load-more {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
 	gap: 8px;
-
 	margin: 24px auto 0;
 	padding: 12px 22px;
-
 	font-size: 14px;
 	font-weight: 600;
 	line-height: 1;
-
 	border-radius: 6px;
 	border: 1px solid #1f1f1f;
-
 	background: #1f1f1f;
 	color: #ffffff;
-
 	cursor: pointer;
 	transition: all 0.25s ease-in-out;
-
 	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 

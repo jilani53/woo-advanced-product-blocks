@@ -20,39 +20,9 @@ require_once __DIR__ . '/vendor/autoload.php';
 use WooAPB\Core\Plugin;
 
 /**
- * Check WooCommerce dependency
- */
-function wooapb_is_woocommerce_active() {
-	return class_exists( 'WooCommerce' );
-}
-
-/**
- * Show admin notice if missing WooCommerce
- */
-function wooapb_missing_wc_notice() {
-
-	if ( ! current_user_can( 'activate_plugins' ) ) {
-		return;
-	}
-	?>
-	<div class="notice notice-error">
-		<p>
-			<?php esc_html_e( 'Woo Advanced Product Blocks requires WooCommerce to be installed and active.', 'wooapb' ); ?>
-		</p>
-	</div>
-	<?php
-}
-
-/**
  * Bootstrap plugin safely
  */
 function wooapb_init() {
-
-	if ( ! wooapb_is_woocommerce_active() ) {
-		add_action( 'admin_notices', 'wooapb_missing_wc_notice' );
-		return;
-	}
-
 	$plugin = new Plugin();
 	$plugin->init();
 }
