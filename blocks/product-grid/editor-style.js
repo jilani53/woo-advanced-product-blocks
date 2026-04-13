@@ -11,16 +11,12 @@ export const useStyleVars = ( attributes ) => {
 
         return {
             '--wooapb-product-card-title-color': attributes?.titleColor?.value || '',
-            '--wooapb-product-card-title-size': fontSize.desktop
-                ? fontSize.desktop + ( fontSize.unit || 'px' )
-                : '',
+            '--wooapb-product-card-title-size': fontSize.desktop ? fontSize.desktop + ( fontSize.unit || 'px' ) : '',
             '--wooapb-product-card-title-weight': typography?.fontWeight || '',
             '--wooapb-product-card-title-style': typography?.fontStyle || '',
             '--wooapb-product-card-title-transform': typography?.textTransform || '',
             '--wooapb-product-card-title-decoration': typography?.textDecoration || '',
-            '--wooapb-product-card-title-letter-spacing': letterSpacing.desktop
-                ? letterSpacing.desktop + ( letterSpacing.unit || 'px' )
-                : '',
+            '--wooapb-product-card-title-letter-spacing': letterSpacing.desktop ? letterSpacing.desktop + ( letterSpacing.unit || 'px' ) : '',
             '--wooapb-product-card-title-line-height': lineHeight.desktop || '',
         };
     }, [
