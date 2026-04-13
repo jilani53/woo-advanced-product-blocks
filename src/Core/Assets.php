@@ -48,30 +48,6 @@ class Assets {
 			true
 		);
 
-		/* Grid */
-		wp_register_style(
-			'wooapb-grid',
-			plugins_url( 'blocks/product-grid/style.css', WOOAPB_FILE ),
-			array( 'wooapb-base' ),
-			WOOAPB_VERSION
-		);
-
-		wp_register_script(
-			'wooapb-grid',
-			plugins_url( 'blocks/product-grid/view.js', WOOAPB_FILE ),
-			array(),
-			WOOAPB_VERSION,
-			true
-		);
-
-		/* Carousel */
-		wp_register_style(
-			'wooapb-carousel',
-			plugins_url( 'blocks/product-carousel/style.css', WOOAPB_FILE ),
-			array( 'wooapb-base', 'wooapb-swiper' ),
-			WOOAPB_VERSION
-		);
-
 		wp_register_script(
 			'wooapb-utils',
 			plugins_url( 'assets/shared/js/utils.js', WOOAPB_FILE ),

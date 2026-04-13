@@ -1,6 +1,6 @@
 <?php
 /**
- * Render carousel style products (converted from grid).
+ * Render carousel style products.
  *
  * @package WooAPB\Blocks\ProductCarousel
  * @since 1.0.0

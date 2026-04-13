@@ -35,9 +35,8 @@ class Plugin {
 
 		// Load block based inline styles.
 		add_action( 'enqueue_block_assets', array( Assets::class, 'enqueue' ), 20 );
-
-		
 		add_action( 'wp_enqueue_scripts', array( Assets::class, 'enqueue' ), 20 );
+
 		if ( wp_is_block_theme() ) {
 			add_action( 'wp_enqueue_scripts', array( CssCollector::class, 'output' ), 20 );
 		} else {
